@@ -1,0 +1,35 @@
+import type { SiteSettings } from "@/types";
+
+/**
+ * MOCK DATA - stands in for an ACF Options Page ("Site Settings") surfaced
+ * through WPGraphQL. This is intentionally the only file where brand-level
+ * placeholder copy is written; every other layer reads it through
+ * services/settings.service.ts.
+ */
+export const mockSiteSettings: SiteSettings = {
+  siteName: "Pure Summit",
+  tagline: "Raw. Rare. New Zealand Manuka.",
+  logo: { id: "logo", url: "/logo.png", altText: "Pure Summit - Premium New Zealand Products", width: 1694, height: 341 },
+  favicon: { id: "favicon", url: "/favicon.ico", altText: "Pure Summit" },
+  contact: {
+    email: "hello@example.com",
+    phone: "+64 9 123 4567",
+    address: "Northland, New Zealand",
+    businessHours: "Mon-Fri, 9am-5pm NZST",
+  },
+  business: {
+    legalName: "Pure Summit Ltd",
+    registrationNumber: "NZ-000000",
+    foundedYear: 2012,
+  },
+  socialLinks: [
+    { label: "Instagram", url: "https://instagram.com" },
+    { label: "Facebook", url: "https://facebook.com" },
+  ],
+  locales: [{ code: "en-NZ", label: "English (New Zealand)", isDefault: true }],
+  defaultLocale: "en-NZ",
+  currencies: [{ code: "NZD", symbol: "$", decimalDigits: 2 }],
+  defaultCurrency: "NZD",
+  storeId: "default",
+  storeName: "Pure Summit",
+};

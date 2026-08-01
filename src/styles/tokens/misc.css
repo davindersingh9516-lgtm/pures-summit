@@ -1,0 +1,34 @@
+/**
+ * BORDER, OPACITY & BREAKPOINT TOKENS
+ * ---------------------------------------------------------------------------
+ * Small remaining primitives that don't warrant their own file.
+ * Breakpoints mirror Tailwind's defaults explicitly so the values have a
+ * single documented source of truth (see constants/breakpoints.constants.ts
+ * for the JS mirror used in useMediaQuery).
+ */
+
+:root {
+  --border-width-hairline: 0.5px;
+  --border-width-thin: 1px;
+  --border-width-medium: 2px;
+  --border-width-thick: 4px;
+
+  --opacity-disabled: 0.5;
+  --opacity-muted: 0.7;
+  --opacity-hover: 0.9;
+  --opacity-overlay: 0.6;
+
+  --breakpoint-xs: 30rem;
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+}
+
+/* Breakpoints MUST be literal values here, not `var(...)` - CSS media query
+   conditions can't reference custom properties, so `@theme inline` (which
+   emits `var(--breakpoint-xs)`) doesn't work for this one key. */
+@theme {
+  --breakpoint-xs: 30rem;
+}

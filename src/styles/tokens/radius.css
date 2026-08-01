@@ -1,0 +1,30 @@
+/**
+ * RADIUS TOKENS
+ * ---------------------------------------------------------------------------
+ * Soft, minimal corner radii - luxury/organic brands favor understated
+ * rounding over sharp or overly playful corners.
+ */
+
+:root {
+  --radius-none: 0px;
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Semantic aliases consumed by components/ui primitives */
+  --radius: var(--radius-md);
+}
+
+@theme inline {
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-full: var(--radius-full);
+}

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#f6ecd8"/>
+  <circle cx="400" cy="290" r="150" fill="#c1861f"/>
+  <text x="400" y="300" text-anchor="middle" font-family="Georgia, serif" font-size="26" fill="#3a2a10">Best Sellers</text>
+</svg>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#eef1ea"/>
+  <circle cx="400" cy="300" r="160" fill="#8a9c72"/>
+  <text x="400" y="310" text-anchor="middle" font-family="Georgia, serif" font-size="26" fill="#212a18">Raw Manuka Honey</text>
+</svg>

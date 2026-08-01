@@ -1,0 +1,36 @@
+/**
+ * Z-INDEX TOKENS
+ * ---------------------------------------------------------------------------
+ * A closed stacking-context scale. Every overlay-ish component in
+ * components/ui should reference one of these instead of an ad-hoc number.
+ */
+
+:root {
+  --z-behind: -1;
+  --z-base: 0;
+  --z-raised: 10;
+  --z-sticky: 20;
+  --z-header: 30;
+  --z-overlay: 40;
+  --z-dropdown: 50;
+  --z-modal: 60;
+  --z-popover: 70;
+  --z-toast: 80;
+  --z-tooltip: 90;
+  --z-max: 999;
+}
+
+@theme inline {
+  --z-index-behind: var(--z-behind);
+  --z-index-base: var(--z-base);
+  --z-index-raised: var(--z-raised);
+  --z-index-sticky: var(--z-sticky);
+  --z-index-header: var(--z-header);
+  --z-index-overlay: var(--z-overlay);
+  --z-index-dropdown: var(--z-dropdown);
+  --z-index-modal: var(--z-modal);
+  --z-index-popover: var(--z-popover);
+  --z-index-toast: var(--z-toast);
+  --z-index-tooltip: var(--z-tooltip);
+  --z-index-max: var(--z-max);
+}

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#f3efe8"/>
+  <rect x="240" y="180" width="320" height="240" rx="16" fill="#c1861f"/>
+  <text x="400" y="310" text-anchor="middle" font-family="Georgia, serif" font-size="26" fill="#332b24">Gift Sets</text>
+</svg>

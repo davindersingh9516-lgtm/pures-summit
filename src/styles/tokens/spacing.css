@@ -1,0 +1,34 @@
+/**
+ * SPACING & CONTAINER TOKENS
+ * ---------------------------------------------------------------------------
+ * A generous, editorial spacing scale layered on top of Tailwind's default
+ * 4px scale via the `--spacing` multiplier, plus named container widths.
+ */
+
+:root {
+  --spacing: 0.25rem; /* base unit consumed by Tailwind's spacing scale */
+
+  --container-xs: 20rem;
+  --container-sm: 24rem;
+  --container-md: 28rem;
+  --container-lg: 32rem;
+  --container-xl: 36rem;
+  --container-2xl: 42rem;
+  --container-3xl: 48rem;
+  --container-content: 65ch;
+  --container-page: 80rem; /* max page width for contained sections - matches the reference design's max-w-7xl */
+}
+
+@theme inline {
+  --spacing: var(--spacing);
+
+  --container-xs: var(--container-xs);
+  --container-sm: var(--container-sm);
+  --container-md: var(--container-md);
+  --container-lg: var(--container-lg);
+  --container-xl: var(--container-xl);
+  --container-2xl: var(--container-2xl);
+  --container-3xl: var(--container-3xl);
+  --container-content: var(--container-content);
+  --container-page: var(--container-page);
+}
