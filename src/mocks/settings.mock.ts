@@ -12,9 +12,9 @@ export const mockSiteSettings: SiteSettings = {
   logo: { id: "logo", url: "/logo.png", altText: "Pure Summit - Premium New Zealand Products", width: 1694, height: 341 },
   favicon: { id: "favicon", url: "/favicon.ico", altText: "Pure Summit" },
   contact: {
-    email: "hello@example.com",
-    phone: "+64 9 123 4567",
-    address: "Northland, New Zealand",
+    email: "hello@puresummit.co.nz",
+    phone: "+64 9 555 0142",
+    address: "14 Harbour View Road, Whangarei, Northland 0110, New Zealand",
     businessHours: "Mon-Fri, 9am-5pm NZST",
   },
   business: {

@@ -1,5 +1,25 @@
 import type { Metadata } from "next";
-import type { SEOData } from "@/types";
+import type { OpenGraphType, SEOData } from "@/types";
+
+/**
+ * Next.js's OpenGraph metadata resolver validates `type` against its own
+ * internal allow-list at RUNTIME (not just in its TypeScript types) and
+ * throws "Invalid OpenGraph type" for anything outside
+ * website/article/book/profile - `product`/`product.group` are real,
+ * Yoast-standard OG types (see `OpenGraphType`) but Next has no first-class
+ * support for them, so they're mapped to `website` here rather than passed
+ * through. A type assertion alone does NOT fix this - it only silences the
+ * compiler while the page still crashes on render.
+ */
+function toNextOpenGraphType(type: OpenGraphType): "website" | "article" | "profile" {
+  switch (type) {
+    case "article":
+    case "profile":
+      return type;
+    default:
+      return "website";
+  }
+}
 
 /**
  * SEO ABSTRACTION LAYER
@@ -32,12 +52,8 @@ export function buildMetadata(seo: SEOData): Metadata {
       languages: Object.fromEntries((seo.alternates ?? []).map((alt) => [alt.hrefLang, alt.href])),
     },
     robots: robotsDirectives,
-    // Next.js's built-in OpenGraph typings only model the four core
-    // og:type variants (website/article/book/profile); "product" is valid
-    // per the OpenGraph protocol and universally used by ecommerce SEO
-    // tools like Yoast, so it's asserted through rather than dropped.
     openGraph: {
-      type: seo.openGraph.type,
+      type: toNextOpenGraphType(seo.openGraph.type),
       title: seo.openGraph.title,
       description: seo.openGraph.description,
       url: seo.openGraph.url,

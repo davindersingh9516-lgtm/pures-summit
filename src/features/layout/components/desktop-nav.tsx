@@ -21,12 +21,12 @@ import { MegaMenu } from "./mega-menu";
  * accessibility primitive rather than reimplemented here.
  */
 export function DesktopNav({ items, transparent = false }: { items: PrimaryNavItem[]; transparent?: boolean }) {
-  // The mega-menu panel itself always renders on its own opaque surface, so
-  // its trigger's OPEN state keeps the default (opaque-header) text color
-  // even while the header is transparent - only the resting/closed state
-  // needs to flip to light-on-dark.
+  // The mega-menu panel itself renders on its own opaque surface, but the
+  // TRIGGER button stays put in the nav row - still over the transparent
+  // header's dark hero background even while its panel is open - so the
+  // trigger's text must stay light in every state, not just at rest.
   const transparentTriggerClassName =
-    "text-(--color-neutral-0) hover:text-(--color-neutral-0) data-[state=open]:text-(--color-foreground)";
+    "text-(--color-neutral-0) hover:text-(--color-neutral-0) data-[state=open]:text-(--color-neutral-0)";
 
   return (
     <NavigationMenu>

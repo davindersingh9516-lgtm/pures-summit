@@ -1,6 +1,7 @@
 import { Suspense, type ReactNode } from "react";
 import { SkipToContent } from "@/components/global/skip-to-content";
 import { ProgressBar } from "@/components/global/progress-bar";
+import { ServiceWorkerCleanup } from "@/components/global/service-worker-cleanup";
 import { getAnnouncementBar, getCurrencies, getFooter, getHeader, getLanguages, getSearchSuggestions } from "@/services";
 import { SearchModal } from "@/features/search";
 import { AnnouncementBar } from "./announcement-bar";
@@ -27,6 +28,7 @@ export async function SiteShell({ children }: { children: ReactNode }) {
   return (
     <>
       <SkipToContent />
+      <ServiceWorkerCleanup />
       <Suspense fallback={null}>
         <ProgressBar />
       </Suspense>

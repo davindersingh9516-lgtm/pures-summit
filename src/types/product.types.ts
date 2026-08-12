@@ -68,6 +68,9 @@ export interface ProductListFilterOption {
 
 export interface ProductListFilters {
   categories: ProductListFilterOption[];
+  /** UMF/MGO grade facet, derived from `product.tags` - `id` is the raw tag
+   * (e.g. "umf10") to filter by, `label` is the display form ("UMF 10+"). */
+  grades: ProductListFilterOption[];
   attributes: Record<string, ProductListFilterOption[]>;
   priceRange: { min: number; max: number };
 }

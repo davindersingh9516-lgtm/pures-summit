@@ -50,7 +50,15 @@ import type {
 export interface ProductListParams {
   page?: number;
   perPage?: number;
+  /** Single-category scope - set by the `/shop/category/[slug]` route itself
+   * rather than a sidebar filter, so it stays exclusive of `categorySlugs`. */
   categorySlug?: string;
+  /** Multi-select category filter, as offered by the shop sidebar. */
+  categorySlugs?: string[];
+  /** UMF/MGO grade filter - matches against `product.tags` (e.g. "umf10",
+   * "mgo550"), since grade isn't its own field in this data model. */
+  tags?: string[];
+  maxPrice?: number;
   search?: string;
   sortBy?: "price-asc" | "price-desc" | "newest" | "rating";
   attributes?: Record<string, string[]>;
