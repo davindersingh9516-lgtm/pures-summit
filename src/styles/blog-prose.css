@@ -1,0 +1,320 @@
+/**
+ * BLOG PROSE
+ * ---------------------------------------------------------------------------
+ * Styles raw WordPress HTML rendered via dangerouslySetInnerHTML inside
+ * `<div class="blog-prose">`. Plain CSS (no @tailwindcss/typography plugin
+ * installed) - editorial long-form treatment, not a docs-site default.
+ * Reading measure is constrained by the parent container, not here.
+ */
+
+.blog-prose {
+  color: var(--color-foreground);
+  font-size: 1.125rem;
+  line-height: var(--leading-relaxed, 1.8);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Headings (h1 excluded - reserved for the page title elsewhere)          */
+/* ---------------------------------------------------------------------- */
+
+.blog-prose h2,
+.blog-prose h3,
+.blog-prose h4,
+.blog-prose h5 {
+  font-family: var(--font-display);
+  color: var(--color-foreground);
+  font-weight: 700;
+  line-height: var(--leading-tight, 1.2);
+  letter-spacing: var(--tracking-tight, -0.01em);
+  scroll-margin-top: 6rem;
+}
+
+.blog-prose h2 {
+  margin-top: 3.5rem;
+  margin-bottom: 1.25rem;
+  font-size: 2.25rem;
+}
+
+.blog-prose h3 {
+  margin-top: 2.75rem;
+  margin-bottom: 1rem;
+  font-size: 1.75rem;
+}
+
+.blog-prose h4 {
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.375rem;
+  font-weight: 600;
+}
+
+.blog-prose h5 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide, 0.02em);
+}
+
+.blog-prose h2:first-child,
+.blog-prose h3:first-child,
+.blog-prose h4:first-child,
+.blog-prose h5:first-child {
+  margin-top: 0;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Paragraphs                                                              */
+/* ---------------------------------------------------------------------- */
+
+.blog-prose p {
+  margin: 0 0 1.5rem;
+  color: var(--color-foreground);
+  line-height: 1.75;
+}
+
+.blog-prose p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Lists                                                                   */
+/* ---------------------------------------------------------------------- */
+
+.blog-prose ul,
+.blog-prose ol {
+  margin: 0 0 1.5rem;
+  padding-left: 1.5rem;
+  color: var(--color-foreground);
+}
+
+.blog-prose ul {
+  list-style: disc;
+}
+
+.blog-prose ol {
+  list-style: decimal;
+}
+
+.blog-prose li {
+  margin-bottom: 0.5rem;
+  padding-left: 0.25rem;
+  line-height: 1.75;
+}
+
+.blog-prose li::marker {
+  color: #12291d;
+  font-weight: 600;
+}
+
+.blog-prose li > ul,
+.blog-prose li > ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  padding-left: 1.5rem;
+}
+
+.blog-prose li:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Blockquote                                                              */
+/* ---------------------------------------------------------------------- */
+
+.blog-prose blockquote {
+  margin: 2.5rem 0;
+  padding: 0.5rem 0 0.5rem 1.75rem;
+  border-left: 4px solid #12291d;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.375rem;
+  line-height: 1.6;
+  color: var(--color-foreground);
+}
+
+.blog-prose blockquote p {
+  margin-bottom: 0.75rem;
+}
+
+.blog-prose blockquote p:last-of-type {
+  margin-bottom: 0;
+}
+
+.blog-prose blockquote cite,
+.blog-prose blockquote footer {
+  display: block;
+  margin-top: 0.75rem;
+  font-family: var(--font-body, inherit);
+  font-style: normal;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-foreground-muted);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Tables                                                                   */
+/* ---------------------------------------------------------------------- */
+
+.blog-prose table {
+  width: 100%;
+  margin: 2rem 0;
+  border-collapse: collapse;
+  font-size: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.blog-prose thead {
+  background: var(--color-muted);
+}
+
+.blog-prose th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-foreground);
+  padding: 0.875rem 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.blog-prose td {
+  padding: 0.875rem 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-foreground);
+}
+
+.blog-prose tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.blog-prose tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--color-muted) 40%, transparent);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Images + captions                                                       */
+/* ---------------------------------------------------------------------- */
+
+.blog-prose img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 2.5rem 0 0.75rem;
+  border-radius: var(--radius-lg);
+}
+
+.blog-prose img + em {
+  display: block;
+  margin: 0 0 2.5rem;
+  font-size: 0.875rem;
+  font-style: italic;
+  text-align: center;
+  color: var(--color-foreground-muted);
+}
+
+.blog-prose figure {
+  margin: 2.5rem 0;
+}
+
+.blog-prose figure img {
+  margin: 0 0 0.75rem;
+}
+
+.blog-prose figcaption {
+  font-size: 0.875rem;
+  font-style: italic;
+  text-align: center;
+  color: var(--color-foreground-muted);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Inline text-level elements                                              */
+/* ---------------------------------------------------------------------- */
+
+.blog-prose a {
+  color: #12291d;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: opacity var(--duration-fast) ease, text-decoration-thickness var(--duration-fast) ease;
+}
+
+.blog-prose a:hover {
+  opacity: 0.72;
+  text-decoration-thickness: 2px;
+}
+
+.blog-prose strong {
+  font-weight: 700;
+  color: inherit;
+}
+
+.blog-prose em {
+  font-style: italic;
+  color: inherit;
+}
+
+.blog-prose code {
+  background: var(--color-muted);
+  color: var(--color-foreground);
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  padding: 0.2em 0.45em;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Horizontal rule                                                         */
+/* ---------------------------------------------------------------------- */
+
+.blog-prose hr {
+  margin: 3.5rem 0;
+  border: none;
+  border-top: 1px solid var(--color-border);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Responsive                                                               */
+/* ---------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .blog-prose {
+    font-size: 1rem;
+  }
+
+  .blog-prose h2 {
+    font-size: 1.75rem;
+    margin-top: 2.75rem;
+  }
+
+  .blog-prose h3 {
+    font-size: 1.5rem;
+    margin-top: 2.25rem;
+  }
+
+  .blog-prose h4 {
+    font-size: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .blog-prose h5 {
+    font-size: 1rem;
+    margin-top: 1.75rem;
+  }
+
+  .blog-prose blockquote {
+    font-size: 1.125rem;
+    padding-left: 1.25rem;
+  }
+
+  .blog-prose table {
+    font-size: 0.875rem;
+  }
+
+  .blog-prose th,
+  .blog-prose td {
+    padding: 0.625rem 0.75rem;
+  }
+}

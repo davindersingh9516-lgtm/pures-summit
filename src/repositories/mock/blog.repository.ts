@@ -32,6 +32,15 @@ export class MockBlogRepository implements IBlogRepository {
     };
   }
 
+  async getRelatedBlogPosts(postId: string) {
+    const post = mockBlogPosts.find((item) => item.id === postId);
+    if (!post) return [];
+    const categorySlugs = new Set(post.categories.map((category) => category.slug));
+    return mockBlogPosts
+      .filter((item) => item.id !== postId && item.categories.some((category) => categorySlugs.has(category.slug)))
+      .slice(0, 3);
+  }
+
   async getAllBlogPostSlugs() {
     return mockBlogPosts.map((post) => post.slug);
   }

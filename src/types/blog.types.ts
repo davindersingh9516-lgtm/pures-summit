@@ -3,9 +3,13 @@ import type { WithSEO } from "./seo.types";
 
 export interface Author {
   id: ID;
+  slug: string;
   name: string;
   avatar?: Image;
   bio?: string;
+  jobTitle?: string;
+  /** External profile links (LinkedIn, X, etc.) - feeds Person schema's `sameAs`. */
+  sameAs?: string[];
 }
 
 export interface BlogCategory extends SlugEntity {

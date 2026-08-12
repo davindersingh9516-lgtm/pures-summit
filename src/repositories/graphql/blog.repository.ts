@@ -15,6 +15,10 @@ export class GraphQLBlogRepository implements IBlogRepository {
     notImplemented("getBlogPosts", "GET_BLOG_POSTS_QUERY");
   }
 
+  async getRelatedBlogPosts(_postId: string): ReturnType<IBlogRepository["getRelatedBlogPosts"]> {
+    notImplemented("getRelatedBlogPosts", "GET_BLOG_POST_QUERY");
+  }
+
   async getAllBlogPostSlugs(): ReturnType<IBlogRepository["getAllBlogPostSlugs"]> {
     notImplemented("getAllBlogPostSlugs", "GET_ALL_BLOG_POST_SLUGS_QUERY");
   }

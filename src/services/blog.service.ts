@@ -4,4 +4,5 @@ import type { BlogListParams } from "@/repositories/interfaces";
 
 export const getBlogPost = cache(async (slug: string) => blogRepository.getBlogPost(slug));
 export const getBlogPosts = cache(async (params?: BlogListParams) => blogRepository.getBlogPosts(params));
+export const getRelatedBlogPosts = cache(async (postId: string) => blogRepository.getRelatedBlogPosts(postId));
 export const getAllBlogPostSlugs = cache(async () => blogRepository.getAllBlogPostSlugs());

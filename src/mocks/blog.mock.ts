@@ -1,16 +1,43 @@
 import type { BlogPost } from "@/types";
 import { createMockSEO } from "./seo.mock";
+import { BLOG_CONTENT_COMPLETE_MANUKA_GUIDE } from "./complete-manuka-guide-content";
 
 const author = {
   id: "author-1",
-  name: "Aroha Ngata",
-  bio: "Beekeeper and third-generation apiarist in Northland, New Zealand.",
+  slug: "davinder-singh",
+  name: "Davinder Singh",
+  jobTitle: "Founder",
+  bio: "Founder of Pure Summit, writing about Manuka honey grading, sourcing, and batch verification straight from the packhouse.",
 };
 
 /**
  * MOCK DATA - stands in for a WPGraphQL `posts` query.
  */
 export const mockBlogPosts: BlogPost[] = [
+  {
+    id: "post-complete-manuka-guide",
+    slug: "complete-guide-to-manuka-honey-grades-and-verification",
+    title: "The Complete Guide to Understanding Manuka Honey Grades, Harvest, and Verification",
+    excerpt:
+      "Everything worth knowing before you buy - how UMF and MGO grading actually work, what happens between hive and jar, and how to tell a genuine jar from a mislabelled one.",
+    content: BLOG_CONTENT_COMPLETE_MANUKA_GUIDE,
+    featuredImage: { id: "post-img-8", url: "/mocks/product-jar.png", altText: "A jar of Pure Summit Manuka honey on a wooden table" },
+    author,
+    categories: [
+      { id: "blog-cat-education", slug: "education", name: "Education" },
+      { id: "blog-cat-sourcing", slug: "sourcing-quality", name: "Sourcing & Quality" },
+    ],
+    tags: ["umf", "mgo", "grading", "harvest", "verification", "buyers-guide"],
+    publishedAt: "2026-07-15T00:00:00.000Z",
+    updatedAt: "2026-07-15T00:00:00.000Z",
+    readingTimeMinutes: 13,
+    seo: createMockSEO({
+      path: "/blog/complete-guide-to-manuka-honey-grades-and-verification",
+      title: "The Complete Guide to Manuka Honey Grades, Harvest & Verification | Pure Summit",
+      description: "How UMF and MGO grading actually work, what happens between hive and jar, and how to tell a genuine jar from a mislabelled one.",
+      type: "article",
+    }),
+  },
   {
     id: "post-batch-traceability",
     slug: "how-we-verify-every-batch",
@@ -78,7 +105,7 @@ export const mockBlogPosts: BlogPost[] = [
     title: "Choosing Your UMF Strength: A Beginner's Guide",
     excerpt: "UMF 5+ or UMF 20+? A short guide to picking a potency that actually matches how you'll use it.",
     content: "<p>The strength number on a jar of Manuka honey is not a scale of quality...</p>",
-    featuredImage: { id: "post-img-4", url: "/mocks/category-umf.svg", altText: "Rows of Manuka honey jars graded by UMF strength" },
+    featuredImage: { id: "post-img-4", url: "/mocks/product-jar.png", altText: "A jar of Pure Summit Manuka honey" },
     author,
     categories: [{ id: "blog-cat-education", slug: "education", name: "Education" }],
     tags: ["umf", "beginners"],
@@ -89,6 +116,66 @@ export const mockBlogPosts: BlogPost[] = [
       path: "/blog/choosing-your-umf-strength",
       title: "Choosing Your UMF Strength: A Beginner's Guide | Pure Summit",
       description: "A short guide to picking a Manuka honey potency that matches how you'll use it.",
+      type: "article",
+    }),
+  },
+  {
+    id: "post-beekeepers",
+    slug: "meet-the-beekeepers-behind-every-jar",
+    title: "Meet the Beekeepers Behind Every Jar",
+    excerpt: "The small network of apiary partners across remote Northland who make each harvest possible.",
+    content: "<p>Long before a jar reaches your table, it starts with a handful of families who have worked these groves for generations...</p>",
+    featuredImage: { id: "post-img-5", url: "/mocks/hero-1.webp", altText: "A Pure Summit apiary partner's jar of raw honey at golden hour in the Northland bush" },
+    author,
+    categories: [{ id: "blog-cat-behind-scenes", slug: "behind-the-scenes", name: "Behind the Scenes" }],
+    tags: ["apiary", "people"],
+    publishedAt: "2026-05-22T00:00:00.000Z",
+    updatedAt: "2026-05-22T00:00:00.000Z",
+    readingTimeMinutes: 7,
+    seo: createMockSEO({
+      path: "/blog/meet-the-beekeepers-behind-every-jar",
+      title: "Meet the Beekeepers Behind Every Jar | Pure Summit",
+      description: "The small network of apiary partners across remote Northland who make each harvest possible.",
+      type: "article",
+    }),
+  },
+  {
+    id: "post-reading-lab-report",
+    slug: "how-to-read-your-batch-lab-report",
+    title: "How to Read Your Batch's Lab Report",
+    excerpt: "A quick guide to the numbers on your Certificate of Analysis - and what they actually confirm.",
+    content: "<p>Every batch we ship carries a lab report behind it. Here's what each line actually means...</p>",
+    featuredImage: { id: "post-img-6", url: "/mocks/umf-mgo-media.jpg", altText: "A jar of Pure Summit honey beside its lab certificate of analysis, viewed through a magnifying glass" },
+    author,
+    categories: [{ id: "blog-cat-sourcing", slug: "sourcing-quality", name: "Sourcing & Quality" }],
+    tags: ["lab-testing", "traceability"],
+    publishedAt: "2026-06-09T00:00:00.000Z",
+    updatedAt: "2026-06-09T00:00:00.000Z",
+    readingTimeMinutes: 5,
+    seo: createMockSEO({
+      path: "/blog/how-to-read-your-batch-lab-report",
+      title: "How to Read Your Batch's Lab Report | Pure Summit",
+      description: "A quick guide to the numbers on your Certificate of Analysis - and what they actually confirm.",
+      type: "article",
+    }),
+  },
+  {
+    id: "post-cooking-with-honey",
+    slug: "three-ways-to-cook-with-raw-manuka-honey",
+    title: "Three Ways to Cook with Raw Manuka Honey",
+    excerpt: "Simple ways to use raw Manuka honey in the kitchen without cooking off what makes it special.",
+    content: "<p>Heat is the enemy of raw honey's natural enzymes, so here's how we actually use it at home...</p>",
+    featuredImage: { id: "post-img-7", url: "/mocks/why-manuka-poster.png", altText: "A jar of Pure Summit Manuka honey surrounded by Manuka flowers in bloom" },
+    author,
+    categories: [{ id: "blog-cat-education", slug: "education", name: "Education" }],
+    tags: ["recipes", "everyday"],
+    publishedAt: "2026-03-30T00:00:00.000Z",
+    updatedAt: "2026-03-30T00:00:00.000Z",
+    readingTimeMinutes: 4,
+    seo: createMockSEO({
+      path: "/blog/three-ways-to-cook-with-raw-manuka-honey",
+      title: "Three Ways to Cook with Raw Manuka Honey | Pure Summit",
+      description: "Simple ways to use raw Manuka honey in the kitchen without cooking off what makes it special.",
       type: "article",
     }),
   },

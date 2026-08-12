@@ -11,6 +11,7 @@
 @import "../styles/tokens/motion.css";
 @import "../styles/tokens/z-index.css";
 @import "../styles/tokens/misc.css";
+@import "../styles/blog-prose.css";
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 

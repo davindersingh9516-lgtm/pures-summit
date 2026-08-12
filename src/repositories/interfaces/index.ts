@@ -121,6 +121,7 @@ export interface ICategoryRepository {
 export interface IBlogRepository {
   getBlogPost(slug: string): Promise<BlogPost | null>;
   getBlogPosts(params?: BlogListParams): Promise<Paginated<BlogPost>>;
+  getRelatedBlogPosts(postId: string): Promise<BlogPost[]>;
   getAllBlogPostSlugs(): Promise<string[]>;
 }
 
