@@ -3,20 +3,23 @@ import { Breadcrumb } from "@/components/global/breadcrumb";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { buildMetadata } from "@/lib/seo/build-metadata";
+import { JsonLd } from "@/lib/seo/json-ld";
 import { createMockSEO } from "@/mocks/seo.mock";
 import { getFooter, getSettings } from "@/services";
 import { ContactForm } from "@/features/contact/components/contact-form";
 import { ContactInfoPanel } from "@/features/contact/components/contact-info-panel";
 import { ContactTrustRow } from "@/features/contact/components/contact-trust-row";
 
+function getContactSEO() {
+  return createMockSEO({
+    path: "/contact",
+    title: "Contact Us | Pure Summit",
+    description: "Questions about an order, a batch, or stocking Pure Summit in your store - get in touch with our team.",
+  });
+}
+
 export async function generateMetadata(): Promise<Metadata> {
-  return buildMetadata(
-    createMockSEO({
-      path: "/contact",
-      title: "Contact Us | Pure Summit",
-      description: "Questions about an order, a batch, or stocking Pure Summit in your store - get in touch with our team.",
-    }),
-  );
+  return buildMetadata(getContactSEO());
 }
 
 export default async function ContactPage() {
@@ -24,6 +27,8 @@ export default async function ContactPage() {
 
   return (
     <>
+      <JsonLd graph={getContactSEO().jsonLd} />
+
       <Section spacing="sm" className="border-b border-(--color-border) bg-(--color-secondary-50)">
         <Container size="full" className="flex flex-col gap-4">
           <Breadcrumb items={[{ label: "Home", url: "/" }, { label: "Contact" }]} />

@@ -7,6 +7,7 @@ import { Section } from "@/components/ui/section";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "@/components/ui/separator";
 import { buildMetadata } from "@/lib/seo/build-metadata";
+import { JsonLd } from "@/lib/seo/json-ld";
 import { getAllProductSlugs, getProduct, getRelatedProducts } from "@/services";
 import { ProductDetailsAccordion } from "@/features/product/components/product-details-accordion";
 import { ProductFAQSection } from "@/features/product/components/product-faq-section";
@@ -52,6 +53,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <>
+      <JsonLd graph={product.seo.jsonLd} />
+
       <Section spacing="sm" className="border-b border-(--color-border)">
         <Container size="full">
           <Breadcrumb items={breadcrumbItems} />

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { buildMetadata } from "@/lib/seo/build-metadata";
+import { JsonLd } from "@/lib/seo/json-ld";
 import { ShopListing, parseShopSearchParams, toURLSearchParams, type ShopSearchParams } from "@/features/shop";
 import { getCategory, getProductFilters, getProducts } from "@/services";
 
@@ -40,17 +41,20 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
   ]);
 
   return (
-    <ShopListing
-      breadcrumbItems={[{ label: "Home", url: "/" }, { label: "Shop", url: "/shop" }, { label: category.name }]}
-      heading={category.name}
-      description={category.description}
-      image={category.image}
-      filters={filters}
-      productsResult={productsResult}
-      currentPage={parsed.page}
-      pathname={`/shop/category/${category.slug}`}
-      searchParams={toURLSearchParams(rawSearchParams)}
-      showCategoryFilter={false}
-    />
+    <>
+      <JsonLd graph={category.seo.jsonLd} />
+      <ShopListing
+        breadcrumbItems={[{ label: "Home", url: "/" }, { label: "Shop", url: "/shop" }, { label: category.name }]}
+        heading={category.name}
+        description={category.description}
+        image={category.image}
+        filters={filters}
+        productsResult={productsResult}
+        currentPage={parsed.page}
+        pathname={`/shop/category/${category.slug}`}
+        searchParams={toURLSearchParams(rawSearchParams)}
+        showCategoryFilter={false}
+      />
+    </>
   );
 }

@@ -6,6 +6,8 @@
 export const ROUTES = {
   home: () => "/",
   page: (slug: string) => `/${slug}`,
+  ourStory: () => "/our-story",
+  labReports: () => "/lab-reports",
   productList: () => "/shop",
   category: (slug: string) => `/shop/category/${slug}`,
   collection: (slug: string) => `/shop/collection/${slug}`,
@@ -14,6 +16,7 @@ export const ROUTES = {
   blogList: () => "/blog",
   blogPost: (slug: string) => `/blog/${slug}`,
   blogCategory: (slug: string) => `/blog/category/${slug}`,
+  blogAuthor: (slug: string) => `/blog/author/${slug}`,
   cart: () => "/cart",
   checkout: () => "/checkout",
   account: () => "/account",
