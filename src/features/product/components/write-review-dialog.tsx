@@ -126,7 +126,7 @@ export function WriteReviewDialog({ productName }: { productName: string }) {
                 Cancel
               </Button>
             </DialogClose>
-            <Button type="submit" className="bg-[#12291d] hover:bg-[#12291d] hover:opacity-90">
+            <Button type="submit" className="bg-(--color-secondary) hover:bg-(--color-secondary) hover:opacity-90">
               Submit Review
             </Button>
           </DialogFooter>

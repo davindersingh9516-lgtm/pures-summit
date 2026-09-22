@@ -20,6 +20,10 @@ export interface GraphQLRequestOptions {
   next?: NextFetchRequestConfig;
   /** AbortSignal for request cancellation (e.g. in route handlers). */
   signal?: AbortSignal;
+  /** Extra request headers - used by the cart/checkout repositories to send
+   * WooGraphQL's `woocommerce-session` token, since cart state lives in a
+   * server-side WC session keyed by that header rather than in the query. */
+  headers?: Record<string, string>;
 }
 
 export class GraphQLRequestError extends Error {
@@ -32,11 +36,11 @@ export class GraphQLRequestError extends Error {
   }
 }
 
-export async function graphqlRequest<TData, TVariables extends Record<string, unknown> = Record<string, unknown>>(
+async function performRequest<TData, TVariables extends Record<string, unknown> = Record<string, unknown>>(
   query: string,
   variables?: TVariables,
   options?: GraphQLRequestOptions,
-): Promise<TData> {
+): Promise<{ data: TData; response: Response }> {
   if (!env.NEXT_PUBLIC_WORDPRESS_GRAPHQL_URL) {
     throw new GraphQLRequestError(
       "NEXT_PUBLIC_WORDPRESS_GRAPHQL_URL is not configured. Set it in .env.local once the " +
@@ -47,7 +51,7 @@ export async function graphqlRequest<TData, TVariables extends Record<string, un
 
   const response = await fetch(env.NEXT_PUBLIC_WORDPRESS_GRAPHQL_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", ...options?.headers },
     body: JSON.stringify({ query, variables }),
     next: options?.next,
     signal: options?.signal,
@@ -67,5 +71,35 @@ export async function graphqlRequest<TData, TVariables extends Record<string, un
     throw new GraphQLRequestError("GraphQL request returned no data");
   }
 
-  return json.data;
+  return { data: json.data, response };
+}
+
+export async function graphqlRequest<TData, TVariables extends Record<string, unknown> = Record<string, unknown>>(
+  query: string,
+  variables?: TVariables,
+  options?: GraphQLRequestOptions,
+): Promise<TData> {
+  const { data } = await performRequest<TData, TVariables>(query, variables, options);
+  return data;
+}
+
+/** Same as `graphqlRequest`, but also returns the `woocommerce-session`
+ * response header so the cart/checkout repositories can hand the (possibly
+ * rotated) session token back to their caller. */
+export async function graphqlSessionRequest<
+  TData,
+  TVariables extends Record<string, unknown> = Record<string, unknown>,
+>(
+  query: string,
+  variables: TVariables | undefined,
+  sessionToken: string | undefined,
+  options?: Omit<GraphQLRequestOptions, "headers">,
+): Promise<{ data: TData; sessionToken: string }> {
+  const { data, response } = await performRequest<TData, TVariables>(query, variables, {
+    ...options,
+    headers: sessionToken ? { "woocommerce-session": `Session ${sessionToken}` } : undefined,
+  });
+
+  const newSessionHeader = response.headers.get("woocommerce-session");
+  return { data, sessionToken: newSessionHeader ?? sessionToken ?? "" };
 }

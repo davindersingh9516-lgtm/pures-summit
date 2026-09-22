@@ -42,7 +42,7 @@ export function FAQCategoryFilter({ faqs, data }: { faqs: FAQItem[]; data: FAQPr
           className={cn(
             "inline-flex items-center gap-1.5 rounded-(--radius-full) px-4 py-2 text-base font-medium transition-colors duration-(--duration-fast)",
             activeCategory === "All"
-              ? "bg-[#12291d] text-(--color-neutral-0)"
+              ? "bg-(--color-secondary) text-(--color-neutral-0)"
               : "bg-(--color-muted) text-(--color-foreground-muted) hover:text-(--color-foreground)",
           )}
         >
@@ -56,7 +56,7 @@ export function FAQCategoryFilter({ faqs, data }: { faqs: FAQItem[]; data: FAQPr
             className={cn(
               "inline-flex items-center gap-1.5 rounded-(--radius-full) px-4 py-2 text-base font-medium transition-colors duration-(--duration-fast)",
               activeCategory === category
-                ? "bg-[#12291d] text-(--color-neutral-0)"
+                ? "bg-(--color-secondary) text-(--color-neutral-0)"
                 : "bg-(--color-muted) text-(--color-foreground-muted) hover:text-(--color-foreground)",
             )}
           >
@@ -87,13 +87,13 @@ export function FAQCategoryFilter({ faqs, data }: { faqs: FAQItem[]; data: FAQPr
         <p className="mx-auto mt-10 max-w-xl text-center text-base text-(--color-foreground-muted)">
           Still have questions?{" "}
           {data.supportEmail ? (
-            <a href={`mailto:${data.supportEmail}`} className="font-medium text-[#12291d] hover:underline">
+            <a href={`mailto:${data.supportEmail}`} className="font-medium text-(--color-secondary) hover:underline">
               Email us
             </a>
           ) : null}
           {data.supportEmail && data.viewAllUrl ? " or " : null}
           {data.viewAllUrl ? (
-            <AppLink href={data.viewAllUrl} className="font-medium text-[#12291d] hover:underline">
+            <AppLink href={data.viewAllUrl} className="font-medium text-(--color-secondary) hover:underline">
               browse all FAQs
             </AppLink>
           ) : null}

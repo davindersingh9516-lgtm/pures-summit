@@ -30,7 +30,7 @@ export function ContactInfoPanel({ contact, socialLinks }: { contact: ContactInf
               Email
             </dt>
             <dd>
-              <a href={`mailto:${contact.email}`} className="text-sm text-(--color-foreground) hover:text-[#12291d]">
+              <a href={`mailto:${contact.email}`} className="text-sm text-(--color-foreground) hover:text-(--color-secondary)">
                 {contact.email}
               </a>
             </dd>
@@ -44,7 +44,7 @@ export function ContactInfoPanel({ contact, socialLinks }: { contact: ContactInf
               Call Us
             </dt>
             <dd>
-              <a href={`tel:${contact.phone}`} className="text-sm text-(--color-foreground) hover:text-[#12291d]">
+              <a href={`tel:${contact.phone}`} className="text-sm text-(--color-foreground) hover:text-(--color-secondary)">
                 {contact.phone}
               </a>
             </dd>

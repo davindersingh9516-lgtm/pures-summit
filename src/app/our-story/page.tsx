@@ -10,8 +10,11 @@ import { buildMetadata } from "@/lib/seo/build-metadata";
 import { JsonLd } from "@/lib/seo/json-ld";
 import { createMockSEO } from "@/mocks/seo.mock";
 import { ROUTES } from "@/constants/routes.constants";
+import { getPage } from "@/services";
 
-function getOurStorySEO() {
+/** Falls back to this only if the "our-story" WordPress page is ever
+ * missing/unpublished - normal path is real Yoast SEO from `getPage()`. */
+function getOurStoryFallbackSEO() {
   return createMockSEO({
     path: ROUTES.ourStory(),
     title: "Our Story | Pure Summit",
@@ -22,8 +25,13 @@ function getOurStorySEO() {
   });
 }
 
+async function getOurStorySEO() {
+  const page = await getPage("our-story");
+  return page?.seo ?? getOurStoryFallbackSEO();
+}
+
 export async function generateMetadata(): Promise<Metadata> {
-  return buildMetadata(getOurStorySEO());
+  return buildMetadata(await getOurStorySEO());
 }
 
 function buildAboutPageJsonLd() {
@@ -48,9 +56,9 @@ const PILLARS = [
   {
     icon: "badge-check" as const,
     eyebrow: "Grading",
-    title: "UMF & MGO, explained honestly",
+    title: "MGO, explained honestly",
     description:
-      "Every jar carries both its UMF grade and the underlying MGO reading - not just a number on a label, but a claim you can independently check against the UMF Honey Association's public register.",
+      "Every jar carries its MGO grade and the lab-measured reading behind it - not just a number on a label, but a result you can check against the batch's published certificate of analysis.",
     href: "/blog/complete-guide-to-manuka-honey-grades-and-verification",
     linkLabel: "Read the grading guide",
   },
@@ -89,7 +97,7 @@ export default async function OurStoryPage() {
       <JsonLd graph={buildAboutPageJsonLd()} />
 
       {/* Hero */}
-      <Section spacing="lg" className="relative overflow-hidden bg-[#12291d] text-(--color-neutral-0)">
+      <Section spacing="lg" className="relative overflow-hidden bg-(--color-secondary) text-(--color-neutral-0)">
         <div className="absolute inset-0">
           <video
             className="size-full object-cover opacity-40"
@@ -110,7 +118,7 @@ export default async function OurStoryPage() {
                 "repeating-radial-gradient(circle at 15% 85%, transparent 0, transparent 46px, #ffffff 47px, #ffffff 48px)",
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#12291d] via-[#12291d]/70 to-[#12291d]/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-(--color-secondary) via-(--color-secondary)/70 to-(--color-secondary)/30" />
         </div>
 
         <Container className="relative flex flex-col items-center gap-6 py-20 text-center sm:py-28">
@@ -159,7 +167,7 @@ export default async function OurStoryPage() {
         </Container>
       </Section>
 
-      {/* Pillars: UMF / Products / Traceability / Education */}
+      {/* Pillars: Grading / Products / Traceability / Education */}
       <Section spacing="md" className="border-y border-(--color-border) bg-(--color-secondary-50)">
         <Container>
           <div className="mx-auto flex max-w-2xl flex-col items-center gap-3 text-center">
@@ -177,7 +185,7 @@ export default async function OurStoryPage() {
                 key={pillar.title}
                 className="flex flex-col gap-4 rounded-(--radius-xl) border border-(--color-border) bg-(--color-surface-raised) p-8"
               >
-                <span className="flex size-11 items-center justify-center rounded-(--radius-full) bg-(--color-secondary-100) text-[#12291d]">
+                <span className="flex size-11 items-center justify-center rounded-(--radius-full) bg-(--color-secondary-100) text-(--color-secondary)">
                   <Icon name={pillar.icon} className="size-5" />
                 </span>
                 <div className="flex flex-col gap-2">
@@ -189,7 +197,7 @@ export default async function OurStoryPage() {
                 </div>
                 <AppLink
                   href={pillar.href}
-                  className="mt-auto inline-flex w-fit items-center gap-1.5 text-sm font-medium text-[#12291d] hover:underline"
+                  className="mt-auto inline-flex w-fit items-center gap-1.5 text-sm font-medium text-(--color-secondary) hover:underline"
                 >
                   {pillar.linkLabel}
                   <Icon name="arrow-right" className="size-4" />
@@ -227,7 +235,7 @@ export default async function OurStoryPage() {
             </p>
             <AppLink
               href={ROUTES.blogAuthor("davinder-singh")}
-              className="inline-flex w-fit items-center gap-1.5 text-sm font-medium text-[#12291d] hover:underline"
+              className="inline-flex w-fit items-center gap-1.5 text-sm font-medium text-(--color-secondary) hover:underline"
             >
               Read more from Davinder Singh
               <Icon name="arrow-right" className="size-4" />

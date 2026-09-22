@@ -13,7 +13,7 @@ export function ContactTrustRow() {
     <div className="grid grid-cols-2 gap-6 border-b border-(--color-border) py-10 sm:grid-cols-4">
       {TRUST_ITEMS.map((item) => (
         <div key={item.id} className="flex flex-col items-center gap-2 text-center sm:flex-row sm:items-start sm:text-left">
-          <Icon name={item.icon} className="size-6 shrink-0 text-[#12291d]" />
+          <Icon name={item.icon} className="size-6 shrink-0 text-(--color-secondary)" />
           <div className="flex flex-col">
             <span className="text-sm font-medium text-(--color-foreground)">{item.label}</span>
             <span className="text-xs text-(--color-foreground-muted)">{item.description}</span>

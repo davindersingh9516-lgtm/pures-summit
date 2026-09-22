@@ -11,6 +11,7 @@ import { Container } from "@/components/ui/container";
 import { Separator } from "@/components/ui/separator";
 import { FooterColumn } from "./footer-column";
 import { NewsletterForm } from "./newsletter-form";
+import { SiteCredit } from "./site-credit";
 
 export function Footer({
   footer,
@@ -26,7 +27,9 @@ export function Footer({
   const hasContactBlock = Boolean(footer.contactEmail || footer.contactPhone || footer.contactHours);
 
   return (
-    <footer className="border-t border-(--color-border) bg-(--color-surface)">
+    <footer data-theme="dark" className="bg-(--color-background)">
+      <div className="h-px bg-gradient-to-r from-transparent via-(--color-brand-400) to-transparent" />
+
       <Container size="full" className="grid grid-cols-2 gap-x-8 gap-y-12 py-16 sm:grid-cols-3 lg:grid-cols-6 lg:gap-x-10 lg:py-20">
         <div className="col-span-2 flex flex-col gap-5 sm:col-span-3 lg:col-span-2">
           <Logo image={logo} />
@@ -46,7 +49,7 @@ export function Footer({
                 {footer.contactEmail ? (
                   <a
                     href={`mailto:${footer.contactEmail}`}
-                    className="flex items-center gap-2 text-sm text-(--color-foreground) transition-colors duration-(--duration-fast) hover:text-[#12291d]"
+                    className="flex items-center gap-2 text-sm text-(--color-foreground) transition-colors duration-(--duration-fast) hover:text-(--color-brand-400)"
                   >
                     <Icon name="mail" className="size-3.5 shrink-0 text-(--color-foreground-muted)" />
                     {footer.contactEmail}
@@ -55,7 +58,7 @@ export function Footer({
                 {footer.contactPhone ? (
                   <a
                     href={`tel:${footer.contactPhone}`}
-                    className="flex items-center gap-2 text-sm text-(--color-foreground) transition-colors duration-(--duration-fast) hover:text-[#12291d]"
+                    className="flex items-center gap-2 text-sm text-(--color-foreground) transition-colors duration-(--duration-fast) hover:text-(--color-brand-400)"
                   >
                     <Icon name="phone" className="size-3.5 shrink-0 text-(--color-foreground-muted)" />
                     {footer.contactPhone}
@@ -76,9 +79,9 @@ export function Footer({
 
       <Separator />
 
-      <div className="bg-(--color-secondary-50)">
+      <div className="bg-(--color-surface)">
         <Container size="full" className="py-10 lg:py-12">
-          <div className="mx-auto max-w-lg lg:mx-0">
+          <div className="mx-auto max-w-lg rounded-(--radius-xl) border border-(--color-border) bg-(--color-surface-raised) p-6 lg:mx-0 lg:p-8">
             <NewsletterForm newsletter={footer.newsletter} />
           </div>
         </Container>
@@ -90,13 +93,15 @@ export function Footer({
           <Container size="full" className="flex flex-wrap items-center gap-x-10 gap-y-5 py-8">
             {footer.certifications.map((cert) => (
               <div key={cert.id} className="flex items-center gap-3">
-                <Image
-                  src={cert.image.url}
-                  alt={cert.image.altText}
-                  width={120}
-                  height={40}
-                  className="h-10 w-auto object-contain opacity-90"
-                />
+                <div className="flex h-12 w-auto items-center rounded-(--radius-md) bg-(--color-neutral-0) px-3 py-2">
+                  <Image
+                    src={cert.image.url}
+                    alt={cert.image.altText}
+                    width={120}
+                    height={32}
+                    className="h-8 w-auto object-contain"
+                  />
+                </div>
                 <div className="flex flex-col">
                   <span className="text-sm font-medium text-(--color-foreground)">{cert.name}</span>
                   {cert.caption ? (
@@ -116,28 +121,30 @@ export function Footer({
             {footer.paymentIcons.length > 0 ? (
               <div className="flex items-center gap-3">
                 {footer.paymentIcons.map((icon) => (
-                  <Image
-                    key={icon.id}
-                    src={icon.image.url}
-                    alt={icon.image.altText}
-                    width={60}
-                    height={24}
-                    className="h-6 w-auto object-contain opacity-70"
-                  />
+                  <div key={icon.id} className="flex h-7 items-center rounded-(--radius-sm) bg-(--color-neutral-0) px-2 py-1">
+                    <Image
+                      src={icon.image.url}
+                      alt={icon.image.altText}
+                      width={60}
+                      height={20}
+                      className="h-5 w-auto object-contain"
+                    />
+                  </div>
                 ))}
               </div>
             ) : null}
             {footer.shippingIcons.length > 0 ? (
               <div className="flex items-center gap-3">
                 {footer.shippingIcons.map((icon) => (
-                  <Image
-                    key={icon.id}
-                    src={icon.image.url}
-                    alt={icon.image.altText}
-                    width={60}
-                    height={24}
-                    className="h-6 w-auto object-contain opacity-70"
-                  />
+                  <div key={icon.id} className="flex h-7 items-center rounded-(--radius-sm) bg-(--color-neutral-0) px-2 py-1">
+                    <Image
+                      src={icon.image.url}
+                      alt={icon.image.altText}
+                      width={60}
+                      height={20}
+                      className="h-5 w-auto object-contain"
+                    />
+                  </div>
                 ))}
               </div>
             ) : null}
@@ -167,6 +174,12 @@ export function Footer({
           <CurrencySelector currencies={currencies} />
           <CountrySelector />
         </div>
+      </Container>
+
+      <Separator />
+
+      <Container size="full" className="flex justify-center py-4">
+        <SiteCredit />
       </Container>
     </footer>
   );

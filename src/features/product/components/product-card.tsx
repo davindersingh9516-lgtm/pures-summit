@@ -46,15 +46,7 @@ export function ProductCard({ product, className, sizes = "(min-width: 1024px) 2
   const primaryCategory = product.categories[0];
 
   function handleAddToCart() {
-    cart.addItem({
-      id: `cart-${product.id}`,
-      productId: product.id,
-      slug: product.slug,
-      name: product.name,
-      image: primaryImage,
-      unitPrice: product.salePrice ?? product.price,
-      quantity: 1,
-    });
+    cart.addItem(product.id, 1);
     toast({ title: "Added to cart", description: product.name });
   }
 
@@ -167,7 +159,7 @@ export function ProductCard({ product, className, sizes = "(min-width: 1024px) 2
         {hasVariants ? (
           <AppLink
             href={ROUTES.product(product.slug)}
-            className="mt-3 flex h-11 w-full items-center justify-center rounded-(--radius-full) bg-[#12291d] text-xs font-semibold tracking-(--tracking-wider) text-(--color-neutral-0) uppercase transition-opacity hover:opacity-90"
+            className="mt-3 flex h-11 w-full items-center justify-center rounded-(--radius-full) bg-(--color-secondary) text-xs font-semibold tracking-(--tracking-wider) text-(--color-neutral-0) uppercase transition-opacity hover:opacity-90"
           >
             Select Options
           </AppLink>
@@ -176,7 +168,7 @@ export function ProductCard({ product, className, sizes = "(min-width: 1024px) 2
             type="button"
             disabled={isOutOfStock}
             onClick={handleAddToCart}
-            className="mt-3 flex h-11 w-full items-center justify-center rounded-(--radius-full) bg-[#12291d] text-xs font-semibold tracking-(--tracking-wider) text-(--color-neutral-0) uppercase transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-(--opacity-disabled)"
+            className="mt-3 flex h-11 w-full items-center justify-center rounded-(--radius-full) bg-(--color-secondary) text-xs font-semibold tracking-(--tracking-wider) text-(--color-neutral-0) uppercase transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-(--opacity-disabled)"
           >
             {isOutOfStock ? "Out of Stock" : "Add to Cart"}
           </button>

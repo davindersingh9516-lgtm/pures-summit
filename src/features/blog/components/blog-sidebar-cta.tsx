@@ -19,7 +19,7 @@ export function BlogSidebarCta() {
           Shop the Manuka range
         </h3>
         <p className="text-sm text-(--color-foreground-muted)">
-          UMF and MGO tested jars, harvested and packed in New Zealand.
+          MGO 263+ lab-tested jars, harvested and packed in New Zealand.
         </p>
         <Button asChild size="sm" className="mt-2 w-full">
           <AppLink href="/shop">Browse jars</AppLink>

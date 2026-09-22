@@ -10,7 +10,7 @@ import { mockBlogPosts } from "./blog.mock";
  * `types/search.types.ts`.
  */
 export const mockSearchSuggestions: SearchSuggestions = {
-  popularSearches: ["UMF 15+", "Gift sets", "Raw honey", "Lab reports"],
+  popularSearches: ["MGO 263+", "Value packs", "Raw honey", "Lab reports"],
   trendingProducts: mockProducts.slice(0, 3).map((product) => ({
     id: product.id,
     name: product.name,

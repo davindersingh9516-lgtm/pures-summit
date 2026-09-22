@@ -2,6 +2,7 @@ export * from "./components/header";
 export * from "./components/footer";
 export * from "./components/footer-column";
 export * from "./components/newsletter-form";
+export * from "./components/site-credit";
 export * from "./components/announcement-bar";
 export * from "./components/desktop-nav";
 export * from "./components/mega-menu";

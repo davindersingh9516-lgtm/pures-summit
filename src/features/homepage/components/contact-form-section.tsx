@@ -75,7 +75,7 @@ function ContactFormPanel({ data }: { data: ContactFormSectionData }) {
   if (status === "sent") {
     return (
       <div className="flex h-full flex-col items-center justify-center gap-4 py-16 text-center">
-        <span className="flex size-12 items-center justify-center rounded-(--radius-full) bg-(--color-secondary-100) text-[#12291d]">
+        <span className="flex size-12 items-center justify-center rounded-(--radius-full) bg-(--color-secondary-100) text-(--color-secondary)">
           <Icon name="badge-check" className="size-6" />
         </span>
         <div className="flex flex-col gap-2">
@@ -87,7 +87,7 @@ function ContactFormPanel({ data }: { data: ContactFormSectionData }) {
         <button
           type="button"
           onClick={handleReset}
-          className="-mx-1 -my-2 px-1 py-2 text-sm font-medium text-[#12291d] hover:underline"
+          className="-mx-1 -my-2 px-1 py-2 text-sm font-medium text-(--color-secondary) hover:underline"
         >
           Send another message
         </button>
@@ -168,7 +168,7 @@ function ContactFormPanel({ data }: { data: ContactFormSectionData }) {
       <Button
         type="submit"
         disabled={status === "sending"}
-        className="mt-2 bg-[#12291d] hover:bg-[#12291d] hover:opacity-90"
+        className="mt-2 bg-(--color-secondary) hover:bg-(--color-secondary) hover:opacity-90"
       >
         {status === "sending" ? (
           <>
@@ -188,7 +188,7 @@ function ContactFormPanel({ data }: { data: ContactFormSectionData }) {
 
 function TrustPanel({ data }: { data: ContactFormSectionData }) {
   return (
-    <div className="relative flex h-full flex-col overflow-hidden bg-[#12291d] p-8 text-(--color-neutral-0) sm:p-10 lg:p-12">
+    <div className="relative flex h-full flex-col overflow-hidden bg-(--color-secondary) p-8 text-(--color-neutral-0) sm:p-10 lg:p-12">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.06]"

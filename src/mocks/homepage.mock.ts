@@ -17,7 +17,7 @@ export const mockHero: HeroSectionData = {
   eyebrow: "Single-origin New Zealand Manuka honey",
   heading: "Honey worth tracing back to the hive.",
   subheading:
-    "Raw, UMF-certified Manuka honey harvested from remote New Zealand hives and independently lab tested for every batch. One product today, an unlimited catalogue tomorrow - the same storefront handles both.",
+    "Raw, MGO 263+ graded Manuka honey harvested from remote New Zealand hives and independently lab tested for every batch. One product today, an unlimited catalogue tomorrow - the same storefront handles both.",
   media: {
     id: "hero-media",
     url: "/mocks/hero-1.webp",
@@ -80,7 +80,7 @@ export const mockHomepageSections: HomepageSection[] = [
     heading: "Best Sellers",
     subheading: "The jars our customers reach for again and again.",
     viewAllUrl: "/shop",
-    limit: 8,
+    limit: 5,
   },
   {
     id: "section-why-manuka",
@@ -89,7 +89,7 @@ export const mockHomepageSections: HomepageSection[] = [
     eyebrow: "Why Manuka Honey",
     heading: "Nature's Rarest Nectar, Verified at Every Step",
     description:
-      "Manuka honey comes from the nectar of the native Manuka tree, found only in New Zealand and parts of Australia. Its natural antibacterial strength - measured as UMF or MGO - makes it unlike any other honey on earth. We work with a small network of apiary partners across remote Northland, harvesting during a short six-week flowering window and lab-testing every batch before it reaches your table. Every jar carries a batch reference, so you can look up the exact harvest, hive location, and lab report before you open the lid.",
+      "Manuka honey comes from the nectar of the native Manuka tree, found only in New Zealand and parts of Australia. Its natural antibacterial strength - measured as MGO, the concentration of methylglyoxal in the honey - makes it unlike any other honey on earth. We work with a small network of apiary partners across remote Northland, harvesting during a short six-week flowering window and lab-testing every batch before it reaches your table. Every jar carries a batch reference, so you can look up the exact harvest, hive location, and lab report before you open the lid.",
     highlights: [
       { id: "why-manuka-highlight-1", icon: "leaf", label: "100% Pure", value: "No blending, no additives" },
       { id: "why-manuka-highlight-2", icon: "flask-conical", label: "Lab Verified", value: "Every batch independently tested" },
@@ -145,7 +145,7 @@ export const mockHomepageSections: HomepageSection[] = [
         number: "04",
         icon: "flask-conical",
         title: "Independent Lab Testing",
-        description: "Every batch is verified for UMF and MGO potency before it's cleared to bottle.",
+        description: "Every batch is verified for MGO potency before it's cleared to bottle.",
       },
       {
         id: "harvest-step-5",
@@ -158,60 +158,59 @@ export const mockHomepageSections: HomepageSection[] = [
     closingNote: "No shortcuts, no blending across batches - just the same five steps, every harvest.",
   },
   {
-    id: "section-umf-mgo-explained",
+    id: "section-mgo-explained",
     type: "featureCardsMedia",
     eyebrow: "Know Your Grade",
-    heading: "UMF™ & MGO Explained",
+    heading: "MGO 263+, Explained",
     description:
-      "Manuka honey is graded by two independent systems - UMF (Unique Manuka Factor) and MGO (Methylglyoxal). Both measure the same natural antibacterial strength, just on different scales. Every Pure Summit jar carries a grade from one of these systems, backed by an independent lab report.",
+      "MGO is the grading scale for Manuka honey, and it measures one thing directly: methylglyoxal, the naturally occurring compound behind Manuka's antibacterial strength. Every Pure Summit jar is graded MGO 263+, and every batch behind that number is backed by an independent lab report you can read.",
     button: { label: "View Lab Reports", url: "/lab-reports", variant: "secondary" },
     cards: [
       {
-        id: "umf-mgo-card-umf",
-        icon: "award",
-        title: "UMF (Unique Manuka Factor)",
-        description:
-          "UMF is a licensed rating system administered by the UMF Honey Association, and it's the strictest way to grade Manuka honey. Rather than measuring a single compound, a UMF grade verifies three natural markers together - leptosperin, DHA, and MGO - so the number on the jar reflects the honey's true, combined potency rather than one isolated figure. Only licensed members can legally print the UMF trademark and grade on their labels, and every batch is checked against the Association's reference standards before it's approved. Because it accounts for leptosperin specifically, UMF is also considered the most reliable way to confirm a honey is genuinely Manuka in the first place, not just high in MGO.",
-      },
-      {
-        id: "umf-mgo-card-mgo",
+        id: "mgo-card-what",
         icon: "gauge",
-        title: "MGO (Methylglyoxal)",
+        title: "What MGO Measures",
         description:
-          "MGO grading measures one specific compound directly: methylglyoxal, the naturally occurring molecule responsible for Manuka honey's antibacterial strength. The number on an MGO label is the actual concentration of methylglyoxal in milligrams per kilogram of honey, so higher numbers mean a more potent jar. It's a simpler, more literal scale than UMF, which is why many brands use it - there's no licensing body to join, just a lab result to publish. We test and publish MGO figures alongside UMF grades where relevant, so you can compare our honey directly against any other brand on the shelf using the same numbers.",
+          "MGO stands for methylglyoxal, the naturally occurring molecule responsible for Manuka honey's non-peroxide antibacterial activity. Unlike vaguer 'strength' or 'active' claims, an MGO figure is a literal laboratory measurement: the concentration of methylglyoxal in milligrams per kilogram of honey. That makes it the most direct number in the category - there is nothing to interpret and no proprietary scale in between you and the result. It also means you can put our jar next to any other MGO-graded honey on the shelf and compare the two figures like for like.",
       },
       {
-        id: "umf-mgo-card-lab",
+        id: "mgo-card-number",
+        icon: "award",
+        title: "Why 263+",
+        description:
+          "The '+' matters: MGO 263+ is a floor, not an average. It means an accredited laboratory measured at least 263 mg/kg of methylglyoxal in that specific batch, and most batches test somewhat above it. We publish a single grade across the whole range rather than a ladder of strengths because we bottle one honey from one harvest window - the 250g jar, the 500g jar and every value pack are filled from the same tested batches. The only thing that changes between our products is how much honey you take home.",
+      },
+      {
+        id: "mgo-card-lab",
         icon: "flask-conical",
         title: "Independently Lab-Tested",
         description:
-          "Grading systems only mean something if the numbers behind them are real, which is why every single batch we bottle - regardless of UMF or MGO grade - is sent to an accredited, independent third-party laboratory before it's approved for sale. That lab tests for potency, purity, and authenticity markers, and issues a dated report tied to that specific harvest. We keep every one of these reports on file and make them available to customers, so you're never just trusting a label - you can see the actual test results behind the jar you're holding, harvest by harvest.",
+          "A grade only means something if the number behind it is real, which is why every batch we bottle is sent to an accredited, independent third-party laboratory before it is approved for sale. That lab measures methylglyoxal alongside the other markers of genuine Manuka - leptosperin, DHA and HMF - and issues a dated report tied to that specific harvest. We keep every one of those reports on file and publish them against the batch code on your jar, so you are never just trusting a label. You can read the actual test result behind the honey you are holding.",
       },
     ],
     media: {
-      id: "umf-mgo-media",
-      url: "/mocks/umf-mgo-media.jpg",
+      id: "mgo-media",
+      url: "/mocks/mgo-media.jpg",
       altText: "A Pure Summit Manuka honey jar beside a magnifying glass and a printed lab certification report",
     },
     imagePosition: "right",
     stats: [
-      { id: "umf-mgo-stat-1", label: "100% Independently Tested" },
-      { id: "umf-mgo-stat-2", label: "Batch-Traceable Reports" },
+      { id: "mgo-stat-1", label: "100% Independently Tested" },
+      { id: "mgo-stat-2", label: "Batch-Traceable Reports" },
     ],
   },
   {
-    id: "section-shop-by-strength",
+    id: "section-shop-the-range",
     type: "productFilterGrid",
-    eyebrow: "UMF / MGO Collection",
-    heading: "Shop by Strength",
-    subheading: "Find the grade that matches how you use your honey - every day, high-potency, or rare.",
+    eyebrow: "MGO 263+ Collection",
+    heading: "Shop the Range",
+    subheading: "One honey, two jar sizes, and multi-jar packs that cost less than buying the jars separately.",
     tabs: [
       { id: "tab-all", label: "All", tagPrefix: "" },
-      { id: "tab-umf", label: "UMF Graded", tagPrefix: "umf" },
-      { id: "tab-mgo", label: "MGO Graded", tagPrefix: "mgo" },
-      { id: "tab-gift", label: "Gift Sets", tagPrefix: "gift" },
+      { id: "tab-jars", label: "Single Jars", tagPrefix: "everyday" },
+      { id: "tab-packs", label: "Value Packs", tagPrefix: "pack" },
     ],
-    limit: 4,
+    limit: 6,
     viewAllUrl: "/shop",
   },
   {
@@ -253,7 +252,6 @@ export const mockHomepageSections: HomepageSection[] = [
           "New Zealand's largest wild Manuka region, with an early subtropical bloom that opens the harvest season each year.",
         harvestWindow: "Late Nov - Mid Dec",
         hiveCount: 620,
-        umfRange: "UMF 5+ - 12+",
         mgoRange: "MGO 150+ - 400+",
         featured: true,
       },
@@ -267,7 +265,6 @@ export const mockHomepageSections: HomepageSection[] = [
           "A remote, wave-battered headland where an intense early bloom produces some of our highest-potency harvests.",
         harvestWindow: "Early Dec - Late Dec",
         hiveCount: 240,
-        umfRange: "UMF 15+ - 24+",
         mgoRange: "MGO 550+ - 1000+",
       },
       {
@@ -280,7 +277,6 @@ export const mockHomepageSections: HomepageSection[] = [
           "Steep, roadless native forest reachable only by helicopter - unmanaged backcountry Manuka at its wildest.",
         harvestWindow: "Mid Dec - Mid Jan",
         hiveCount: 180,
-        umfRange: "UMF 12+ - 18+",
         mgoRange: "MGO 400+ - 700+",
       },
       {
@@ -292,7 +288,6 @@ export const mockHomepageSections: HomepageSection[] = [
         description: "Volcanic soils ringing Mt Taranaki, with hives set deep in isolated bush at the mountain's edge.",
         harvestWindow: "Early Dec - Early Jan",
         hiveCount: 310,
-        umfRange: "UMF 8+ - 15+",
         mgoRange: "MGO 250+ - 550+",
       },
       {
@@ -304,7 +299,6 @@ export const mockHomepageSections: HomepageSection[] = [
         description: "Drowned river valleys and boat-only islands - our flagship South Island harvest ground.",
         harvestWindow: "Mid Dec - Late Jan",
         hiveCount: 275,
-        umfRange: "UMF 10+ - 20+",
         mgoRange: "MGO 300+ - 850+",
         featured: true,
       },
@@ -324,8 +318,7 @@ export const mockHomepageSections: HomepageSection[] = [
           regionId: "region-northland",
           harvestDate: "14 Dec 2025",
           bestBefore: "Dec 2028",
-          umf: "UMF 10+",
-          mgo: "MGO 300+",
+          mgo: "MGO 291 (measured)",
           lab: "Analytica Laboratories",
         },
         {
@@ -334,8 +327,7 @@ export const mockHomepageSections: HomepageSection[] = [
           regionId: "region-northland",
           harvestDate: "02 Jan 2026",
           bestBefore: "Jan 2029",
-          umf: "UMF 8+",
-          mgo: "MGO 250+",
+          mgo: "MGO 268 (measured)",
           lab: "AsureQuality NZ",
         },
         {
@@ -344,8 +336,7 @@ export const mockHomepageSections: HomepageSection[] = [
           regionId: "region-east-cape",
           harvestDate: "08 Dec 2025",
           bestBefore: "Dec 2028",
-          umf: "UMF 20+",
-          mgo: "MGO 850+",
+          mgo: "MGO 342 (measured)",
           lab: "AsureQuality NZ",
         },
         {
@@ -354,8 +345,7 @@ export const mockHomepageSections: HomepageSection[] = [
           regionId: "region-te-urewera",
           harvestDate: "22 Dec 2025",
           bestBefore: "Dec 2028",
-          umf: "UMF 15+",
-          mgo: "MGO 550+",
+          mgo: "MGO 318 (measured)",
           lab: "Analytica Laboratories",
         },
         {
@@ -364,8 +354,7 @@ export const mockHomepageSections: HomepageSection[] = [
           regionId: "region-taranaki",
           harvestDate: "18 Dec 2025",
           bestBefore: "Dec 2028",
-          umf: "UMF 12+",
-          mgo: "MGO 400+",
+          mgo: "MGO 277 (measured)",
           lab: "AsureQuality NZ",
         },
         {
@@ -374,8 +363,7 @@ export const mockHomepageSections: HomepageSection[] = [
           regionId: "region-marlborough",
           harvestDate: "15 Jan 2026",
           bestBefore: "Jan 2029",
-          umf: "UMF 18+",
-          mgo: "MGO 700+",
+          mgo: "MGO 329 (measured)",
           lab: "Analytica Laboratories",
         },
       ],
@@ -412,7 +400,7 @@ export const mockHomepageSections: HomepageSection[] = [
     phoneNote: "Wholesale & trade enquiries only",
     topics: ["General Question", "Order Support", "Wholesale / Trade", "Press", "Other"],
     trustBadges: [
-      { id: "contact-badge-umf", icon: "shield-check", label: "UMF Licensed" },
+      { id: "contact-badge-mgo", icon: "shield-check", label: "MGO 263+ Graded" },
       { id: "contact-badge-nz", icon: "map-pin", label: "100% NZ Owned" },
       { id: "contact-badge-lab", icon: "flask-conical", label: "Independently Lab-Tested" },
     ],

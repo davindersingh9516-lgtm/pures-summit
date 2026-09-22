@@ -33,3 +33,31 @@ export const SEO_FRAGMENT = /* GraphQL */ `
     }
   }
 `;
+
+/** Same shape as `SeoFields`, but for taxonomy terms (categories, tags) -
+ * the addon exposes a distinct `TaxonomySEO` type for those, not
+ * `PostTypeSEO`, even though the field selection is identical. */
+export const SEO_TAXONOMY_FRAGMENT = /* GraphQL */ `
+  fragment SeoTaxonomyFields on TaxonomySEO {
+    title
+    metaDesc
+    canonical
+    metaRobotsNoindex
+    metaRobotsNofollow
+    opengraphTitle
+    opengraphDescription
+    opengraphImage {
+      sourceUrl
+      altText
+    }
+    twitterTitle
+    twitterDescription
+    twitterImage {
+      sourceUrl
+      altText
+    }
+    schema {
+      raw
+    }
+  }
+`;

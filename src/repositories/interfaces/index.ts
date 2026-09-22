@@ -16,12 +16,17 @@
  */
 
 import type {
+  Address,
   AnnouncementBarData,
+  AuthSession,
   BlogPost,
   Cart,
   Certificate,
+  CheckoutInput,
   Collection,
+  CreateAccountInput,
   Currency,
+  Customer,
   FAQItem,
   FeaturedVideo,
   FooterData,
@@ -33,6 +38,7 @@ import type {
   Locale,
   NavigationData,
   NewsletterSignup,
+  Order,
   Page,
   Paginated,
   Product,
@@ -55,8 +61,8 @@ export interface ProductListParams {
   categorySlug?: string;
   /** Multi-select category filter, as offered by the shop sidebar. */
   categorySlugs?: string[];
-  /** UMF/MGO grade filter - matches against `product.tags` (e.g. "umf10",
-   * "mgo550"), since grade isn't its own field in this data model. */
+  /** MGO grade filter - matches against `product.tags` (e.g. "mgo263"),
+   * since grade isn't its own field in this data model. */
   tags?: string[];
   maxPrice?: number;
   search?: string;
@@ -141,10 +147,41 @@ export interface ISEORepository {
   getSEOByUri(uri: string): Promise<SEOData | null>;
 }
 
-/** Not yet consumed by any page - reserved for the checkout/cart feature
- * module so the repository contract exists before the UI does. */
+/** `sessionToken` is the opaque WooCommerce session identifier (WooGraphQL's
+ * `woocommerce-session` header, JWT-shaped). Every mutating call returns the
+ * (possibly rotated) token alongside the updated cart so the caller - always
+ * a `src/app/api/cart/*` route handler, never a client component directly -
+ * can persist it back into the `ps_woo_session` httpOnly cookie. Pass
+ * `undefined` for a brand new, cart-less visitor. */
+export interface CartResult {
+  cart: Cart;
+  sessionToken: string;
+}
+
 export interface ICartRepository {
-  getCart(cartId: string): Promise<Cart | null>;
+  getCart(sessionToken?: string): Promise<CartResult>;
+  addItem(sessionToken: string | undefined, productId: string, quantity: number, variantId?: string): Promise<CartResult>;
+  updateItemQuantity(sessionToken: string, itemKey: string, quantity: number): Promise<CartResult>;
+  removeItem(sessionToken: string, itemKey: string): Promise<CartResult>;
+  clearCart(sessionToken: string): Promise<CartResult>;
+  applyCoupon(sessionToken: string, code: string): Promise<CartResult>;
+  removeCoupon(sessionToken: string, code: string): Promise<CartResult>;
+  /** Also re-selects a matching shipping rate for the new address's zone -
+   * WooCommerce doesn't do this automatically (see graphql/cart.repository.ts). */
+  updateShippingAddress(sessionToken: string, address: Address): Promise<CartResult>;
+  selectShippingRate(sessionToken: string, rateId: string): Promise<CartResult>;
+}
+
+/** Places the order and marks it paid - called only after a Stripe
+ * PaymentIntent has actually succeeded (see /api/webhooks/stripe), never
+ * from the client directly. */
+export interface ICheckoutRepository {
+  placeOrder(sessionToken: string, input: CheckoutInput): Promise<Order>;
+  /** Registers a WP customer on the current cart session (so the guest cart
+   * carries over) and returns the resulting (now-authenticated) session
+   * token - called from /api/checkout/create-payment-intent when the
+   * shopper checks "Create an account", before payment. */
+  createAccount(sessionToken: string, input: CreateAccountInput): Promise<CartResult>;
 }
 
 export interface IHeaderRepository {
@@ -167,4 +204,13 @@ export interface ILanguageRepository {
 
 export interface ICurrencyRepository {
   getCurrencies(): Promise<Currency[]>;
+}
+
+/** Login only - registration happens as part of `ICheckoutRepository.placeOrder`
+ * (WooGraphQL's `checkout` mutation creates the account inline when the
+ * customer checks "Create an account"), not through a separate signup form. */
+export interface IAuthRepository {
+  login(username: string, password: string): Promise<AuthSession>;
+  getCurrentCustomer(authToken: string): Promise<Customer | null>;
+  getOrders(authToken: string): Promise<Order[]>;
 }

@@ -37,7 +37,7 @@ export function ProductImageGallery({ images, productName }: { images: ImageType
                 aria-current={isActive}
                 className={cn(
                   "relative size-16 shrink-0 overflow-hidden rounded-(--radius-md) border-2 bg-(--color-brand-50) transition-colors sm:size-20",
-                  isActive ? "border-[#12291d]" : "border-transparent hover:border-(--color-border-strong)",
+                  isActive ? "border-(--color-secondary)" : "border-transparent hover:border-(--color-border-strong)",
                 )}
               >
                 <Image src={image.url} alt={image.altText} fill sizes="80px" className="object-contain" />

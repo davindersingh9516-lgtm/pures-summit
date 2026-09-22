@@ -14,7 +14,7 @@ function NewsletterBanner({ newsletter }: { newsletter: NewsletterSignup }) {
   return (
     <div className="rounded-(--radius-xl) border border-(--color-border) bg-(--color-secondary-50) p-8 sm:p-10">
       <div className="flex flex-col gap-5">
-        <span className="flex size-10 items-center justify-center rounded-(--radius-full) bg-(--color-secondary-100) text-[#12291d]">
+        <span className="flex size-10 items-center justify-center rounded-(--radius-full) bg-(--color-secondary-100) text-(--color-secondary)">
           <Icon name="mail" className="size-4" />
         </span>
         <NewsletterForm newsletter={newsletter} />
@@ -25,7 +25,7 @@ function NewsletterBanner({ newsletter }: { newsletter: NewsletterSignup }) {
 
 function ShopBanner() {
   return (
-    <div className="relative overflow-hidden rounded-(--radius-xl) bg-[#12291d] p-8 text-(--color-neutral-0) sm:p-10">
+    <div className="relative overflow-hidden rounded-(--radius-xl) bg-(--color-secondary) p-8 text-(--color-neutral-0) sm:p-10">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 z-0 opacity-[0.06]"
@@ -43,10 +43,10 @@ function ShopBanner() {
           Taste the difference verified purity makes
         </h3>
         <p className="max-w-md text-base text-(--color-neutral-0)/85">
-          Every jar is UMF and MGO tested for potency, so what&apos;s on the label is exactly what&apos;s in the
-          honey.
+          Every jar is independently MGO tested for potency, so what&apos;s on the label is exactly what&apos;s in
+          the honey.
         </p>
-        <Button asChild size="lg" className="mt-2 bg-(--color-neutral-0) text-[#12291d] hover:opacity-90">
+        <Button asChild size="lg" className="mt-2 bg-(--color-neutral-0) text-(--color-secondary) hover:opacity-90">
           <AppLink href="/shop">Shop the range</AppLink>
         </Button>
       </div>

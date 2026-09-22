@@ -17,9 +17,9 @@ type Step = ProcessStepsSectionData["steps"][number];
  * instead of guessing at rendered text height. */
 function StepMarker({ number, icon }: { number: string; icon: Step["icon"] }) {
   return (
-    <div className="relative flex size-16 shrink-0 items-center justify-center rounded-(--radius-full) border-2 border-[#12291d] bg-(--color-secondary-50)">
-      <Icon name={icon} className="size-6 text-[#12291d]" />
-      <span className="absolute -top-2 -right-2 flex size-6 items-center justify-center rounded-(--radius-full) bg-[#12291d] font-(family-name:--font-mono) text-[0.65rem] font-semibold text-(--color-neutral-0)">
+    <div className="relative flex size-16 shrink-0 items-center justify-center rounded-(--radius-full) border-2 border-(--color-secondary) bg-(--color-secondary-50)">
+      <Icon name={icon} className="size-6 text-(--color-secondary)" />
+      <span className="absolute -top-2 -right-2 flex size-6 items-center justify-center rounded-(--radius-full) bg-(--color-secondary) font-(family-name:--font-mono) text-[0.65rem] font-semibold text-(--color-neutral-0)">
         {number}
       </span>
     </div>
@@ -75,7 +75,7 @@ export function ProcessStepsSection({ data }: { data: ProcessStepsSectionData })
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: duration.slow, delay: index * 0.12 + 0.15, ease: easing.editorial }}
-              className="absolute top-8 h-px origin-left bg-[#12291d]"
+              className="absolute top-8 h-px origin-left bg-(--color-secondary)"
               style={{ left: `${((index + 0.5) / stepCount) * 100}%`, width: `${(1 / stepCount) * 100}%` }}
             />
           ))}

@@ -36,17 +36,7 @@ export function ProductInfoPanel({ product }: { product: Product }) {
   function handleAddToCart() {
     if (hasVariants && !activeVariant) return;
 
-    cart.addItem({
-      id: activeVariant ? `cart-${product.id}-${activeVariant.id}` : `cart-${product.id}`,
-      productId: product.id,
-      variantId: activeVariant?.id,
-      slug: product.slug,
-      name: product.name,
-      image: product.images[0],
-      unitPrice: price,
-      quantity,
-      selections: hasVariants ? selections : undefined,
-    });
+    cart.addItem(product.id, quantity, activeVariant?.id);
 
     toast({
       title: "Added to cart",
@@ -61,7 +51,7 @@ export function ProductInfoPanel({ product }: { product: Product }) {
   return (
     <div className="flex flex-col gap-5">
       {primaryCategory ? (
-        <span className="text-xs font-semibold tracking-(--tracking-wider) text-[#12291d] uppercase">
+        <span className="text-xs font-semibold tracking-(--tracking-wider) text-(--color-secondary) uppercase">
           {primaryCategory.name}
         </span>
       ) : null}
@@ -78,7 +68,7 @@ export function ProductInfoPanel({ product }: { product: Product }) {
           <button
             type="button"
             onClick={() => scrollTo("reviews")}
-            className="flex items-center gap-1.5 text-sm font-medium text-[#12291d] hover:underline"
+            className="flex items-center gap-1.5 text-sm font-medium text-(--color-secondary) hover:underline"
           >
             <Icon name="pencil-line" className="size-3.5" />
             Write a Review
@@ -98,7 +88,7 @@ export function ProductInfoPanel({ product }: { product: Product }) {
         <button
           type="button"
           onClick={() => scrollTo("description")}
-          className="mt-1 text-sm font-medium text-[#12291d] hover:underline"
+          className="mt-1 text-sm font-medium text-(--color-secondary) hover:underline"
         >
           Read more
         </button>
@@ -122,7 +112,7 @@ export function ProductInfoPanel({ product }: { product: Product }) {
                       aria-pressed={isSelected}
                       className={
                         isSelected
-                          ? "rounded-(--radius-md) border-2 border-[#12291d] bg-(--color-secondary-50) px-4 py-2 text-sm font-medium text-(--color-foreground)"
+                          ? "rounded-(--radius-md) border-2 border-(--color-secondary) bg-(--color-secondary-50) px-4 py-2 text-sm font-medium text-(--color-foreground)"
                           : "rounded-(--radius-md) border-2 border-(--color-border) px-4 py-2 text-sm font-medium text-(--color-foreground-muted) transition-colors hover:border-(--color-border-strong)"
                       }
                     >
@@ -141,7 +131,7 @@ export function ProductInfoPanel({ product }: { product: Product }) {
         <Button
           onClick={handleAddToCart}
           disabled={isOutOfStock}
-          className="h-11 flex-1 bg-[#12291d] hover:bg-[#12291d] hover:opacity-90"
+          className="h-11 flex-1 bg-(--color-secondary) hover:bg-(--color-secondary) hover:opacity-90"
         >
           {isOutOfStock ? "Out of Stock" : "Add to Cart"}
         </Button>
@@ -155,7 +145,7 @@ export function ProductInfoPanel({ product }: { product: Product }) {
           </>
         ) : (
           <>
-            <Icon name="circle-check" className="size-4 text-[#12291d]" />
+            <Icon name="circle-check" className="size-4 text-(--color-secondary)" />
             <span className="text-(--color-foreground)">In stock</span>
           </>
         )}
@@ -173,19 +163,19 @@ export function ProductInfoPanel({ product }: { product: Product }) {
 
       <div className="grid grid-cols-3 gap-3 rounded-(--radius-lg) bg-(--color-muted) p-4">
         <div className="flex flex-col items-center gap-1.5 text-center">
-          <Icon name="flask-conical" className="size-5 text-[#12291d]" />
+          <Icon name="flask-conical" className="size-5 text-(--color-secondary)" />
           <span className="text-xs font-medium text-(--color-foreground)">Independently Lab-Tested</span>
         </div>
         <div className="flex flex-col items-center gap-1.5 text-center">
-          <Icon name="badge-check" className="size-5 text-[#12291d]" />
-          <span className="text-xs font-medium text-(--color-foreground)">UMF / MGO Verified</span>
+          <Icon name="badge-check" className="size-5 text-(--color-secondary)" />
+          <span className="text-xs font-medium text-(--color-foreground)">MGO 263+ Verified</span>
         </div>
         <div className="flex flex-col items-center gap-1.5 text-center">
-          <Icon name="map-pin" className="size-5 text-[#12291d]" />
+          <Icon name="map-pin" className="size-5 text-(--color-secondary)" />
           <span className="text-xs font-medium text-(--color-foreground)">Batch Traceable</span>
         </div>
       </div>
-      <AppLink href="/lab-reports" className="-mt-2 text-sm font-medium text-[#12291d] hover:underline">
+      <AppLink href="/lab-reports" className="-mt-2 text-sm font-medium text-(--color-secondary) hover:underline">
         See lab reports →
       </AppLink>
     </div>

@@ -3,8 +3,11 @@ import * as mock from "./mock";
 import * as graphql from "./graphql";
 import type {
   IAnnouncementRepository,
+  IAuthRepository,
   IBlogRepository,
+  ICartRepository,
   ICategoryRepository,
+  ICheckoutRepository,
   IContentRepository,
   ICurrencyRepository,
   IFooterRepository,
@@ -93,5 +96,17 @@ export const languageRepository: ILanguageRepository = useGraphQL
 export const currencyRepository: ICurrencyRepository = useGraphQL
   ? new graphql.GraphQLCurrencyRepository()
   : new mock.MockCurrencyRepository();
+
+export const cartRepository: ICartRepository = useGraphQL
+  ? new graphql.GraphQLCartRepository()
+  : new mock.MockCartRepository();
+
+export const checkoutRepository: ICheckoutRepository = useGraphQL
+  ? new graphql.GraphQLCheckoutRepository()
+  : new mock.MockCheckoutRepository();
+
+export const authRepository: IAuthRepository = useGraphQL
+  ? new graphql.GraphQLAuthRepository()
+  : new mock.MockAuthRepository();
 
 export type * from "./interfaces";

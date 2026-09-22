@@ -41,6 +41,11 @@ export interface ProductReviewSummary {
   count: number;
 }
 
+export interface ProductSpecification {
+  label: string;
+  value: string;
+}
+
 export interface Product extends SlugEntity, WithSEO {
   type: ProductType;
   name: string;
@@ -58,6 +63,7 @@ export interface Product extends SlugEntity, WithSEO {
   reviewSummary: ProductReviewSummary;
   relatedProductIds: ID[];
   badges?: string[];
+  specifications?: ProductSpecification[];
 }
 
 export interface ProductListFilterOption {
@@ -68,8 +74,8 @@ export interface ProductListFilterOption {
 
 export interface ProductListFilters {
   categories: ProductListFilterOption[];
-  /** UMF/MGO grade facet, derived from `product.tags` - `id` is the raw tag
-   * (e.g. "umf10") to filter by, `label` is the display form ("UMF 10+"). */
+  /** MGO grade facet, derived from `product.tags` - `id` is the raw tag
+   * (e.g. "mgo263") to filter by, `label` is the display form ("MGO 263+"). */
   grades: ProductListFilterOption[];
   attributes: Record<string, ProductListFilterOption[]>;
   priceRange: { min: number; max: number };

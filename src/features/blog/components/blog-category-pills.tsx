@@ -30,7 +30,7 @@ export function BlogCategoryPills({ categories }: { categories: BlogCategory[] }
         className={cn(
           "rounded-(--radius-full) px-4 py-2 text-sm font-medium transition-colors duration-(--duration-fast)",
           !activeSlug
-            ? "bg-[#12291d] text-(--color-neutral-0)"
+            ? "bg-(--color-secondary) text-(--color-neutral-0)"
             : "bg-(--color-muted) text-(--color-foreground-muted) hover:text-(--color-foreground)",
         )}
       >
@@ -44,7 +44,7 @@ export function BlogCategoryPills({ categories }: { categories: BlogCategory[] }
           className={cn(
             "rounded-(--radius-full) px-4 py-2 text-sm font-medium transition-colors duration-(--duration-fast)",
             activeSlug === category.slug
-              ? "bg-[#12291d] text-(--color-neutral-0)"
+              ? "bg-(--color-secondary) text-(--color-neutral-0)"
               : "bg-(--color-muted) text-(--color-foreground-muted) hover:text-(--color-foreground)",
           )}
         >

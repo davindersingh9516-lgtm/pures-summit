@@ -48,7 +48,7 @@ export function BlogStatChart({ title, data, unit }: BlogStatChartProps) {
               </span>
               <span className="relative h-3 flex-1 overflow-hidden rounded-(--radius-full) bg-(--color-muted)">
                 <span
-                  className="absolute inset-y-0 left-0 rounded-(--radius-full) bg-[#12291d] transition-all duration-700 ease-out"
+                  className="absolute inset-y-0 left-0 rounded-(--radius-full) bg-(--color-secondary) transition-all duration-700 ease-out"
                   style={{ width: visible ? `${percentage}%` : "0%" }}
                 />
               </span>

@@ -6,10 +6,10 @@ import type { Certificate } from "@/types";
  */
 export const mockCertificates: Certificate[] = [
   {
-    id: "cert-umf-license",
-    name: "UMF License",
-    description: "Licensed by the UMF Honey Association",
-    image: { id: "cert-umf-license-img", url: "/mocks/certification-umf.svg", altText: "UMF certification mark" },
+    id: "cert-mgo-verified",
+    name: "MGO Verified",
+    description: "Methylglyoxal content confirmed by an accredited independent laboratory",
+    image: { id: "cert-mgo-verified-img", url: "/mocks/certification-mgo.svg", altText: "MGO verified mark" },
   },
   {
     id: "cert-organic-cert",

@@ -72,7 +72,7 @@ export function Pagination({ currentPage, totalPages, buildHref, className }: Pa
             className={cn(
               pageLinkClassName,
               page === currentPage
-                ? "bg-[#12291d] text-(--color-neutral-0)"
+                ? "bg-(--color-secondary) text-(--color-neutral-0)"
                 : "text-(--color-foreground) hover:bg-(--color-muted)",
             )}
           >

@@ -32,7 +32,7 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
             <button
               type="button"
               onClick={scrollToReviews}
-              className="w-fit text-sm font-medium text-[#12291d] hover:underline"
+              className="w-fit text-sm font-medium text-(--color-secondary) hover:underline"
             >
               See all reviews ↓
             </button>
@@ -44,7 +44,7 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
         <AccordionTrigger className="text-base font-medium">Quality &amp; Compliance</AccordionTrigger>
         <AccordionContent>
           <ul className="flex flex-col gap-2 text-sm leading-relaxed text-(--color-foreground-muted)">
-            <li>Every batch is independently lab-tested for UMF/MGO potency before release.</li>
+            <li>Every batch is independently lab-tested for MGO potency before release.</li>
             <li>Sourced and packed under New Zealand MPI food safety regulations.</li>
             <li>Batch-numbered and traceable back to its harvest region and hive on our Origin &amp; Traceability map.</li>
           </ul>

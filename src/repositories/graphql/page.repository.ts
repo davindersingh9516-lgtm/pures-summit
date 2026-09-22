@@ -1,16 +1,26 @@
 import type { IPageRepository } from "../interfaces";
-import { notImplemented } from "./not-implemented";
+import type { Page } from "@/types";
+import { graphqlRequest } from "@/graphql/client";
+import { GET_ALL_PAGE_SLUGS_QUERY, GET_PAGE_QUERY } from "@/graphql/queries/page.queries";
+import { mapWooPage, type WPPageNode } from "@/graphql/mappers/page.mapper";
+import { siteConfig } from "@/config/site.config";
 
-/**
- * Future implementation: call `graphqlRequest(GET_PAGE_QUERY /
- * GET_ALL_PAGE_SLUGS_QUERY)` and map onto `Page`.
- */
 export class GraphQLPageRepository implements IPageRepository {
-  async getPage(_slug: string): ReturnType<IPageRepository["getPage"]> {
-    notImplemented("getPage", "GET_PAGE_QUERY");
+  async getPage(slug: string): Promise<Page | null> {
+    const data = await graphqlRequest<{ page: WPPageNode | null }>(
+      GET_PAGE_QUERY,
+      { slug },
+      { next: { revalidate: siteConfig.revalidateSeconds.page } },
+    );
+    return data.page ? mapWooPage(data.page) : null;
   }
 
-  async getAllPageSlugs(): ReturnType<IPageRepository["getAllPageSlugs"]> {
-    notImplemented("getAllPageSlugs", "GET_ALL_PAGE_SLUGS_QUERY");
+  async getAllPageSlugs(): Promise<string[]> {
+    const data = await graphqlRequest<{ pages: { nodes: { slug: string }[] } }>(
+      GET_ALL_PAGE_SLUGS_QUERY,
+      undefined,
+      { next: { revalidate: siteConfig.revalidateSeconds.page } },
+    );
+    return data.pages.nodes.map((node) => node.slug);
   }
 }

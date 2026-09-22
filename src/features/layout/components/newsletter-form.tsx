@@ -56,11 +56,7 @@ export function NewsletterForm({ newsletter }: { newsletter: NewsletterSignup })
               </FormItem>
             )}
           />
-          <Button
-            type="submit"
-            disabled={form.formState.isSubmitting}
-            className="bg-[#12291d] hover:bg-[#12291d] hover:opacity-90"
-          >
+          <Button type="submit" disabled={form.formState.isSubmitting}>
             {t("newsletterSubmit")}
           </Button>
         </form>

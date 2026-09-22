@@ -4,9 +4,12 @@ import { motion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
 import { duration, easing } from "@/styles/tokens/motion";
 
+/** No `opacity` in `hidden` - see components/animations/stagger.tsx's
+ * itemVariants comment. A stalled `whileInView` trigger should cost the
+ * entrance slide, never make the block invisible. */
 const variants: Variants = {
-  hidden: { opacity: 0, y: 12 },
-  visible: { opacity: 1, y: 0 },
+  hidden: { y: 12 },
+  visible: { y: 0 },
 };
 
 /**

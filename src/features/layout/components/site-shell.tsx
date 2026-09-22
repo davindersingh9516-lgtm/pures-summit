@@ -37,7 +37,12 @@ export async function SiteShell({ children }: { children: ReactNode }) {
       <main id="main" className="flex flex-1 flex-col">
         {children}
       </main>
-      <Footer footer={footer} logo={header.logo} languages={languages} currencies={currencies} />
+      <Footer
+        footer={footer}
+        logo={header.logoDark ?? header.logo}
+        languages={languages}
+        currencies={currencies}
+      />
       <SearchModal suggestions={searchSuggestions} />
     </>
   );

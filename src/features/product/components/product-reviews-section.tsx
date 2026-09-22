@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { RatingStars } from "@/components/global/rating-stars";
 import { formatDate } from "@/utils/format-date";
 import { getReviewsForProduct } from "@/services";
+import { ProductRatingBreakdown } from "./product-rating-breakdown";
 import { WriteReviewDialog } from "./write-review-dialog";
 import type { Product, Review } from "@/types";
 
@@ -39,10 +40,20 @@ export async function ProductReviewsSection({ product }: { product: Product }) {
         <WriteReviewDialog productName={product.name} />
       </div>
 
+      {reviews.length > 0 ? (
+        <div className="mt-8">
+          <ProductRatingBreakdown
+            reviews={reviews}
+            averageRating={product.reviewSummary.averageRating}
+            totalCount={product.reviewSummary.count}
+          />
+        </div>
+      ) : null}
+
       <div className="mt-8">
         {reviews.length === 0 ? (
           <div className="flex flex-col items-center gap-3 rounded-(--radius-xl) border border-(--color-border) bg-(--color-surface) py-16 text-center">
-            <span className="flex size-11 items-center justify-center rounded-(--radius-full) bg-(--color-secondary-50) text-[#12291d]">
+            <span className="flex size-11 items-center justify-center rounded-(--radius-full) bg-(--color-secondary-50) text-(--color-secondary)">
               <Icon name="message-circle" className="size-5" />
             </span>
             <p className="font-medium text-(--color-foreground)">No reviews yet</p>

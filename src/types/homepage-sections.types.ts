@@ -204,7 +204,7 @@ export interface FutureCustomBlockSectionData extends HomepageSectionBase<"futur
 
 /** Editorial copy + a stack of explainer cards on one side, a single large
  * image (with an optional small stats row beneath it) on the other -
- * e.g. "UMF vs MGO Explained". `imagePosition` controls which side the
+ * e.g. "MGO 263+, Explained". `imagePosition` controls which side the
  * image sits on. */
 export interface FeatureCardsMediaSectionData extends HomepageSectionBase<"featureCardsMedia"> {
   eyebrow?: string;
@@ -279,7 +279,8 @@ export interface OriginTraceabilitySectionData extends HomepageSectionBase<"orig
     description: string;
     harvestWindow: string;
     hiveCount: number;
-    umfRange: string;
+    /** Typical MGO band this region's harvests test at - regional context,
+     * not the grade of any one jar. */
     mgoRange: string;
     /** Only 1-2 regions should be `featured` (pulses to invite the first
      * click) - marking every pin featured reads as noisy, not premium. */
@@ -298,7 +299,7 @@ export interface OriginTraceabilitySectionData extends HomepageSectionBase<"orig
       regionId: ID;
       harvestDate: string;
       bestBefore?: string;
-      umf: string;
+      /** The lab-measured MGO figure for this batch. */
       mgo: string;
       lab: string;
     }>;

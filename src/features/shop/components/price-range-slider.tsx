@@ -43,7 +43,7 @@ export function PriceRangeSlider({
         onTouchEnd={commit}
         onKeyUp={commit}
         aria-label="Maximum price"
-        className="h-1.5 w-full cursor-pointer appearance-none rounded-(--radius-full) bg-(--color-muted) accent-[#12291d]"
+        className="h-1.5 w-full cursor-pointer appearance-none rounded-(--radius-full) bg-(--color-muted) accent-(--color-secondary)"
       />
       <p className="text-center text-sm font-medium text-(--color-foreground)">Up to {formatMoney(value * 100, "NZD")}</p>
     </div>

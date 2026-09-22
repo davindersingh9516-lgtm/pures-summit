@@ -13,6 +13,13 @@ export interface CartLineItem {
   selections?: Record<string, string>;
 }
 
+export interface ShippingRate {
+  id: ID;
+  label: string;
+  cost: Money;
+  selected: boolean;
+}
+
 export interface Cart {
   id: ID;
   items: CartLineItem[];
@@ -22,6 +29,14 @@ export interface Cart {
   total: Money;
   currencyCode: string;
   couponCodes: string[];
+  /** Tax breakdown and live shipping rates - undefined in the pre-backend
+   * localStorage cart, populated once `CartContext` calls the real
+   * repository (see src/repositories/graphql/cart.repository.ts). */
+  subtotalTax?: Money;
+  shippingTax?: Money;
+  totalTax?: Money;
+  needsShippingAddress?: boolean;
+  availableShippingRates?: ShippingRate[];
 }
 
 export interface WishlistItem {

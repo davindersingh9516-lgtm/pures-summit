@@ -99,7 +99,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </h1>
 
             <div className="flex flex-wrap items-center gap-3 text-sm text-(--color-foreground-muted)">
-              <AppLink href={ROUTES.blogAuthor(post.author.slug)} className="font-medium text-(--color-foreground) hover:text-[#12291d]">
+              <AppLink href={ROUTES.blogAuthor(post.author.slug)} className="font-medium text-(--color-foreground) hover:text-(--color-secondary)">
                 By {post.author.name}
               </AppLink>
               <span aria-hidden>&middot;</span>

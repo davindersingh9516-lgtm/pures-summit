@@ -18,7 +18,7 @@ import type { ProductCarouselSectionData } from "@/types";
  * (renders nothing) if the shop has nothing to feature yet.
  */
 export async function ProductCarouselSection({ data }: { data: ProductCarouselSectionData }) {
-  const products = await getFeaturedProducts(data.limit);
+  const products = (await getFeaturedProducts(data.limit)).slice(0, data.limit);
 
   if (!products || products.length === 0) {
     return null;
@@ -38,7 +38,7 @@ export async function ProductCarouselSection({ data }: { data: ProductCarouselSe
         )}
 
         <Stagger className="mt-10">
-          <Grid cols={{ base: 2, sm: 2, md: 3, lg: 4 }} gap="lg">
+          <Grid cols={{ base: 2, sm: 2, md: 3, lg: 5 }} gap="lg">
             {products.map((product) => (
               <StaggerItem key={product.id}>
                 <ProductCard product={product} sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw" />

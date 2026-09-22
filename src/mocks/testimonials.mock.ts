@@ -32,7 +32,7 @@ export const mockTestimonials: Testimonial[] = [
     authorName: "Marcus T.",
     authorTitle: "Verified Customer",
     quote:
-      "I've bought Manuka from three other brands before this one, and Pure Summit is the first where the UMF number actually matched what I could taste and feel.",
+      "I've bought Manuka from three other brands before this one, and Pure Summit is the first where the MGO number actually matched what I could taste and feel.",
     rating: 5,
   },
   {

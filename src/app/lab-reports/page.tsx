@@ -7,16 +7,19 @@ import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { buildMetadata } from "@/lib/seo/build-metadata";
 import { createMockSEO } from "@/mocks/seo.mock";
-import { getCertificates } from "@/services";
+import { getCertificates, getPage } from "@/services";
+
+function getLabReportsFallbackSEO() {
+  return createMockSEO({
+    path: "/lab-reports",
+    title: "Lab Reports & Certifications | Pure Summit",
+    description: "How every batch of Pure Summit Manuka honey is independently lab-tested, certified, and traced back to its harvest region.",
+  });
+}
 
 export async function generateMetadata(): Promise<Metadata> {
-  return buildMetadata(
-    createMockSEO({
-      path: "/lab-reports",
-      title: "Lab Reports & Certifications | Pure Summit",
-      description: "How every batch of Pure Summit Manuka honey is independently lab-tested, certified, and traced back to its harvest region.",
-    }),
-  );
+  const page = await getPage("lab-reports");
+  return buildMetadata(page?.seo ?? getLabReportsFallbackSEO());
 }
 
 const VERIFICATION_STEPS = [
@@ -24,13 +27,13 @@ const VERIFICATION_STEPS = [
     icon: "flask-conical" as const,
     title: "Independent lab testing",
     description:
-      "Every batch is sampled and sent to an accredited, independent laboratory - never tested only in-house - for UMF and MGO marker analysis.",
+      "Every batch is sampled and sent to an accredited, independent laboratory - never tested only in-house - for MGO and authenticity marker analysis.",
   },
   {
     icon: "badge-check" as const,
-    title: "UMF & MGO verification",
+    title: "MGO verification",
     description:
-      "Results are checked against UMF Honey Association licensing thresholds before any grade is approved and printed on a jar.",
+      "Results are checked against the MGO 263+ threshold before any grade is approved and printed on a jar - a batch that misses it doesn't ship under that grade.",
   },
   {
     icon: "map-pin" as const,
@@ -63,7 +66,7 @@ export default async function LabReportsPage() {
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
             {VERIFICATION_STEPS.map((step) => (
               <div key={step.title} className="flex flex-col items-start gap-3 rounded-(--radius-xl) border border-(--color-border) p-6">
-                <span className="flex size-11 items-center justify-center rounded-(--radius-full) bg-(--color-secondary-50) text-[#12291d]">
+                <span className="flex size-11 items-center justify-center rounded-(--radius-full) bg-(--color-secondary-50) text-(--color-secondary)">
                   <Icon name={step.icon} className="size-5" />
                 </span>
                 <p className="text-base font-semibold text-(--color-foreground)">{step.title}</p>
@@ -109,7 +112,7 @@ export default async function LabReportsPage() {
             </p>
             <AppLink
               href="/blog/how-we-verify-every-batch"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-[#12291d] hover:underline"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-(--color-secondary) hover:underline"
             >
               How we verify every batch
               <Icon name="arrow-right" className="size-4" />

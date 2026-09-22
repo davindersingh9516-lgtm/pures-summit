@@ -11,9 +11,18 @@ const containerVariants: Variants = {
   },
 };
 
+/**
+ * No `opacity` in the hidden state, deliberately - only a Y-offset. Content
+ * that never animates (slow hydration, a script error, `whileInView` never
+ * firing because a wrapping element made the viewport intersection check
+ * behave unexpectedly - all observed happening on a slow dev machine) still
+ * renders fully visible, just without the entrance slide. `opacity: 0` here
+ * previously meant a stalled animation left entire product grids invisible
+ * - real content can't depend on JS succeeding to be seen at all.
+ */
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 12 },
-  visible: { opacity: 1, y: 0, transition: { duration: duration.normal, ease: easing.editorial } },
+  hidden: { y: 12 },
+  visible: { y: 0, transition: { duration: duration.normal, ease: easing.editorial } },
 };
 
 /**

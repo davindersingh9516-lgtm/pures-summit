@@ -82,7 +82,7 @@ export function ShopFiltersContent({
           <button
             type="button"
             onClick={() => router.push(pathname, { scroll: false })}
-            className="text-xs font-medium text-(--color-foreground-muted) transition-colors hover:text-[#12291d]"
+            className="text-xs font-medium text-(--color-foreground-muted) transition-colors hover:text-(--color-secondary)"
           >
             Clear all
           </button>
@@ -128,7 +128,7 @@ export function ShopFiltersContent({
         {filters.grades.length > 0 ? (
           <AccordionItem value="grade">
             <AccordionTrigger className="text-xs font-semibold tracking-(--tracking-wider) text-(--color-foreground) uppercase">
-              UMF / MGO Grade
+              MGO Grade
             </AccordionTrigger>
             <AccordionContent>
               <ul className="flex flex-col gap-3">

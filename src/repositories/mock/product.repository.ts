@@ -1,15 +1,8 @@
 import type { IProductRepository, ProductListParams } from "../interfaces";
-import type { Paginated, Product, ProductListFilterOption, ProductListFilters } from "@/types";
+import type { Paginated, Product, ProductListFilters } from "@/types";
 import { mockProducts } from "@/mocks";
 import { siteConfig } from "@/config/site.config";
-
-const GRADE_TAG_PATTERN = /^(umf|mgo)(\d+)$/i;
-
-function gradeLabelFromTag(tag: string): string | null {
-  const match = GRADE_TAG_PATTERN.exec(tag);
-  if (!match) return null;
-  return `${match[1].toUpperCase()} ${match[2]}+`;
-}
+import { computeProductFilters } from "../shared/product-facets";
 
 function sortProducts(products: Product[], sortBy?: ProductListParams["sortBy"]) {
   const sorted = [...products];
@@ -87,42 +80,7 @@ export class MockProductRepository implements IProductRepository {
       ? mockProducts.filter((product) => product.categories.some((category) => category.slug === categorySlug))
       : mockProducts;
 
-    const categoryCounts = new Map<string, ProductListFilterOption>();
-    const gradeCounts = new Map<string, ProductListFilterOption>();
-
-    for (const product of scoped) {
-      for (const category of product.categories) {
-        const existing = categoryCounts.get(category.slug);
-        if (existing) {
-          existing.count += 1;
-        } else {
-          categoryCounts.set(category.slug, { id: category.slug, label: category.name, count: 1 });
-        }
-      }
-
-      for (const tag of product.tags) {
-        const label = gradeLabelFromTag(tag);
-        if (!label) continue;
-        const existing = gradeCounts.get(tag);
-        if (existing) {
-          existing.count += 1;
-        } else {
-          gradeCounts.set(tag, { id: tag, label, count: 1 });
-        }
-      }
-    }
-
-    const prices = scoped.map((product) => product.price.amount);
-
-    return {
-      categories: Array.from(categoryCounts.values()).sort((a, b) => a.label.localeCompare(b.label)),
-      grades: Array.from(gradeCounts.values()).sort((a, b) => a.label.localeCompare(b.label)),
-      attributes: {},
-      priceRange: {
-        min: prices.length ? Math.min(...prices) / 100 : 0,
-        max: prices.length ? Math.max(...prices) / 100 : 0,
-      },
-    };
+    return computeProductFilters(scoped);
   }
 
   async getRelatedProducts(productId: string) {

@@ -77,15 +77,7 @@ export function QuickViewDialog({
               ) : (
                 <Button
                   onClick={() => {
-                    addItem({
-                      id: `cart-${product.id}`,
-                      productId: product.id,
-                      slug: product.slug,
-                      name: product.name,
-                      image: product.images[0],
-                      unitPrice: product.salePrice ?? product.price,
-                      quantity: 1,
-                    });
+                    addItem(product.id, 1);
                     onOpenChange(false);
                   }}
                   disabled={product.stockStatus === "OUT_OF_STOCK"}

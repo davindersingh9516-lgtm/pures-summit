@@ -6,10 +6,10 @@ import type { FAQItem } from "@/types";
  */
 export const mockFAQs: FAQItem[] = [
   {
-    id: "faq-umf-vs-mgo",
-    question: "How is UMF different from MGO?",
+    id: "faq-what-is-mgo",
+    question: "What does MGO 263+ mean?",
     answer:
-      "UMF and MGO are both potency-grading systems for Manuka honey, tested by independent laboratories. UMF also verifies additional purity markers and requires licensing from the UMF Honey Association.",
+      "MGO stands for Methylglyoxal, the naturally occurring compound behind Manuka honey's non-peroxide antibacterial activity. The number is the minimum measured concentration in milligrams per kilogram - so MGO 263+ means an independent laboratory measured at least 263 mg/kg in that batch.",
     category: "Product",
   },
   {
@@ -19,10 +19,17 @@ export const mockFAQs: FAQItem[] = [
     category: "Product",
   },
   {
-    id: "faq-strength-choice",
-    question: "What's the difference between UMF 5+ and UMF 20+?",
+    id: "faq-size-choice",
+    question: "Should I buy the 250g or the 500g jar?",
     answer:
-      "The number reflects potency, not quality - UMF 5+ to 10+ suits everyday use, while UMF 15+ and above is typically chosen for more targeted, concentrated use.",
+      "It's the same MGO 263+ honey in both - only the jar size changes. The 250g suits a first order or an occasional spoonful; the 500g works out cheaper per gram and suits a daily habit. If you already know you'll reorder, a value pack is cheaper again than buying the jars one at a time.",
+    category: "Product",
+  },
+  {
+    id: "faq-value-packs",
+    question: "What's in the value packs?",
+    answer:
+      "Multi-jar packs of the same MGO 263+ honey: two 250g jars, two 500g jars, a 500g plus a 250g, or the family pack of two 500g jars plus a 250g. Each pack is priced below buying those jars separately, and the saving is shown on the product card.",
     category: "Product",
   },
   {
@@ -53,10 +60,10 @@ export const mockFAQs: FAQItem[] = [
     category: "Sourcing & Quality",
   },
   {
-    id: "faq-umf-licensing",
-    question: "What does UMF licensing actually verify?",
+    id: "faq-mgo-verification",
+    question: "How is the MGO grade verified?",
     answer:
-      "UMF licensing requires annual audits and independent lab testing of leptosperin, DHA, HMF, and MGO for every batch before the UMF mark can be used.",
+      "Every batch is sampled and sent to an accredited independent laboratory - never tested only in-house - which measures Methylglyoxal alongside the other markers of genuine Manuka, including leptosperin, DHA and HMF. A grade is only printed on a jar once those results come back above the claimed level.",
     category: "Sourcing & Quality",
   },
   {

@@ -52,10 +52,10 @@ function ProductFilterSection({ data, products }: ProductFilterSectionProps) {
 
         {filteredProducts.length > 0 ? (
           <Stagger className="mt-10">
-            <Grid cols={{ base: 2, sm: 2, md: 3, lg: 4 }} gap="lg">
+            <Grid cols={{ base: 2, sm: 2, md: 3, lg: 3 }} gap="lg">
               {filteredProducts.map((product) => (
                 <StaggerItem key={product.id}>
-                  <ProductCard product={product} sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw" />
+                  <ProductCard product={product} sizes="(min-width: 640px) 33vw, 50vw" />
                 </StaggerItem>
               ))}
             </Grid>

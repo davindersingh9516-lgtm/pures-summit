@@ -70,7 +70,7 @@ export function BlogToc({ headings }: { headings: BlogTocHeading[] }) {
                 "border-l-2 py-1 text-sm transition-colors duration-(--duration-fast)",
                 INDENT_BY_LEVEL[heading.level],
                 isActive
-                  ? "border-[#12291d] font-bold text-[#12291d]"
+                  ? "border-(--color-secondary) font-bold text-(--color-secondary)"
                   : "border-transparent text-(--color-foreground-muted) hover:text-(--color-foreground)",
               )}
             >

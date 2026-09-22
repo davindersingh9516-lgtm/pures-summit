@@ -114,7 +114,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
               {author.name}
             </h1>
             {author.jobTitle ? (
-              <span className="text-sm font-medium tracking-(--tracking-wide) text-[#12291d] uppercase">
+              <span className="text-sm font-medium tracking-(--tracking-wide) text-(--color-secondary) uppercase">
                 {author.jobTitle}
               </span>
             ) : null}

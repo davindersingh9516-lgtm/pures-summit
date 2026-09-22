@@ -33,16 +33,16 @@ export interface NewsletterSignup {
   consentText?: string;
 }
 
-/** An image-based certification mark (UMF license, BioGro organic, ...) -
+/** An image-based certification mark (MGO lab verification, BioGro organic, ...) -
  * distinct from `TrustBadge` (homepage-domain.types.ts), which is the
  * icon+label style badge used in hero/trust-icon sections. */
 export interface CertificationBadge {
   id: ID;
   name: string;
   image: Image;
-  /** One-line credibility caption shown under the badge name, e.g. "UMF
-   * Licensed Member #4102" - an unlabeled badge reads as decoration, a
-   * captioned one reads as an actual certification. */
+  /** One-line credibility caption shown under the badge name, e.g.
+   * "Independent MGO lab test, every batch" - an unlabeled badge reads as
+   * decoration, a captioned one reads as an actual certification. */
   caption?: string;
 }
 

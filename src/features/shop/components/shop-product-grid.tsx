@@ -12,13 +12,15 @@ export function ShopProductGrid({ products }: { products: Product[] }) {
     );
   }
 
+  // 3-up at desktop rather than 4: the catalogue is six products, which fills
+  // two clean rows here instead of leaving an orphan on a second row.
   return (
-    <Grid cols={{ base: 2, sm: 2, md: 3, lg: 4 }} gap="lg">
+    <Grid cols={{ base: 2, sm: 2, md: 3, lg: 3 }} gap="lg">
       {products.map((product) => (
         <ProductCard
           key={product.id}
           product={product}
-          sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 50vw"
+          sizes="(min-width: 768px) 33vw, 50vw"
         />
       ))}
     </Grid>

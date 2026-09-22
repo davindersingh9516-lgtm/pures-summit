@@ -22,11 +22,11 @@ export const mockAnnouncementBarData: AnnouncementBarData = {
       ctaLabel: "Shop Now",
     },
     {
-      id: "announcement-gifts",
-      message: "Gift sets ready for the holidays",
+      id: "announcement-packs",
+      message: "Save up to $19.80 on multi-jar value packs",
       icon: "gift",
-      url: "/shop/category/gift-sets",
-      ctaLabel: "View Gift Sets",
+      url: "/shop/category/value-packs",
+      ctaLabel: "View Value Packs",
     },
   ],
 };

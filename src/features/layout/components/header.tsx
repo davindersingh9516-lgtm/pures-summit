@@ -36,11 +36,13 @@ export function Header({
   const { itemCount: cartCount } = useCart();
   const { items: wishlistItems } = useWishlist();
 
-  const isTransparent = transparentOverHero && isAtTop;
+  // Always solid, even over the hero - the header stays a fixed white/light
+  // bar regardless of scroll position or which page mounts
+  // `TransparentHeroBoundary`. `transparentOverHero` still drives whether
+  // the header is taken out of document flow (`fixed` vs `sticky`) below,
+  // since the hero's full-viewport video still needs to run underneath it.
+  const isTransparent = false;
   const isHidden = direction === "down" && !isAtTop;
-  // While a page's hero is mounted (TransparentHeroBoundary), the header must
-  // be taken out of document flow entirely so the hero's full-viewport video
-  // runs behind it instead of being pushed down by the header's own height.
   const iconColorClassName = isTransparent
     ? "text-(--color-neutral-0) hover:bg-(--color-neutral-0)/15 hover:text-(--color-neutral-0)"
     : undefined;

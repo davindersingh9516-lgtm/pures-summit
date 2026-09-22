@@ -81,7 +81,7 @@ export async function BlogPreviewSection({ data }: { data: BlogPreviewSectionDat
             {data.viewAllUrl ? (
               <AppLink
                 href={data.viewAllUrl}
-                className="group -my-2 inline-flex w-fit items-center gap-1.5 py-2 text-sm font-medium text-(--color-foreground) hover:text-[#12291d]"
+                className="group -my-2 inline-flex w-fit items-center gap-1.5 py-2 text-sm font-medium text-(--color-foreground) hover:text-(--color-secondary)"
               >
                 View the Journal
                 <Icon name="arrow-right" className="size-4 transition-transform duration-(--duration-normal) group-hover:translate-x-1" />

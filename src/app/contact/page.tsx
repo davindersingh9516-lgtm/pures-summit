@@ -5,12 +5,12 @@ import { Section } from "@/components/ui/section";
 import { buildMetadata } from "@/lib/seo/build-metadata";
 import { JsonLd } from "@/lib/seo/json-ld";
 import { createMockSEO } from "@/mocks/seo.mock";
-import { getFooter, getSettings } from "@/services";
+import { getFooter, getPage, getSettings } from "@/services";
 import { ContactForm } from "@/features/contact/components/contact-form";
 import { ContactInfoPanel } from "@/features/contact/components/contact-info-panel";
 import { ContactTrustRow } from "@/features/contact/components/contact-trust-row";
 
-function getContactSEO() {
+function getContactFallbackSEO() {
   return createMockSEO({
     path: "/contact",
     title: "Contact Us | Pure Summit",
@@ -18,16 +18,21 @@ function getContactSEO() {
   });
 }
 
+async function getContactSEO() {
+  const page = await getPage("contact");
+  return page?.seo ?? getContactFallbackSEO();
+}
+
 export async function generateMetadata(): Promise<Metadata> {
-  return buildMetadata(getContactSEO());
+  return buildMetadata(await getContactSEO());
 }
 
 export default async function ContactPage() {
-  const [settings, footer] = await Promise.all([getSettings(), getFooter()]);
+  const [settings, footer, seo] = await Promise.all([getSettings(), getFooter(), getContactSEO()]);
 
   return (
     <>
-      <JsonLd graph={getContactSEO().jsonLd} />
+      <JsonLd graph={seo.jsonLd} />
 
       <Section spacing="sm" className="border-b border-(--color-border) bg-(--color-secondary-50)">
         <Container size="full" className="flex flex-col gap-4">

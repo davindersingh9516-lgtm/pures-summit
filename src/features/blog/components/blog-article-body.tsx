@@ -3,12 +3,12 @@ import { BlogStatChart } from "./blog-stat-chart";
 import type { BlogContentSegment } from "../utils/parse-blog-content";
 import type { NewsletterSignup } from "@/types";
 
-const UMF_GRADE_DATA = [
-  { label: "UMF 5+", value: 83 },
-  { label: "UMF 10+", value: 263 },
-  { label: "UMF 15+", value: 514 },
-  { label: "UMF 20+", value: 829 },
-  { label: "UMF 24+", value: 1050 },
+const MGO_GRADE_DATA = [
+  { label: "MGO 83+", value: 83 },
+  { label: "MGO 263+", value: 263 },
+  { label: "MGO 514+", value: 514 },
+  { label: "MGO 829+", value: 829 },
+  { label: "MGO 1000+", value: 1050 },
 ];
 
 export function BlogArticleBody({ segments, newsletter }: { segments: BlogContentSegment[]; newsletter: NewsletterSignup }) {
@@ -22,8 +22,8 @@ export function BlogArticleBody({ segments, newsletter }: { segments: BlogConten
           return (
             <BlogStatChart
               key={index}
-              title="UMF Grade vs. Approximate MGO Potency"
-              data={UMF_GRADE_DATA}
+              title="MGO Grade Bands by Methylglyoxal Content"
+              data={MGO_GRADE_DATA}
               unit="mg/kg"
             />
           );

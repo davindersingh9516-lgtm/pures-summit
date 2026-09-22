@@ -14,7 +14,7 @@ const cardBackgrounds = ["bg-(--color-brand-100)", "bg-(--color-secondary-100)",
 /**
  * Editorial copy + a stack of explainer cards on one side, a single large
  * image (with an optional small stats row beneath it) on the other -
- * e.g. "UMF vs MGO Explained". `data.imagePosition` controls which side the
+ * e.g. "MGO 263+, Explained". `data.imagePosition` controls which side the
  * image renders on, via order classes rather than duplicated markup.
  */
 export function FeatureCardsMediaSection({ data }: { data: FeatureCardsMediaSectionData }) {

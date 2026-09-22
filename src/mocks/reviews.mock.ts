@@ -7,7 +7,7 @@ import type { Review } from "@/types";
 export const mockReviews: Review[] = [
   {
     id: "review-1",
-    productId: "prod-umf-10-250g",
+    productId: "prod-mgo-263-250g",
     authorName: "Sarah T.",
     rating: 5,
     title: "Exactly as described",
@@ -17,7 +17,7 @@ export const mockReviews: Review[] = [
   },
   {
     id: "review-2",
-    productId: "prod-umf-10-250g",
+    productId: "prod-mgo-263-500g",
     authorName: "James K.",
     rating: 4,
     content: "Great everyday honey, a little pricier than I expected but worth it.",

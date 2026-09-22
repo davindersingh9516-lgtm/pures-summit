@@ -15,8 +15,8 @@ export const mockFooterData: FooterData = {
       title: "Shop",
       links: [
         { label: "Raw Manuka Honey", url: "/shop/category/raw-manuka-honey" },
-        { label: "UMF Graded", url: "/shop/category/umf-graded" },
-        { label: "Gift Sets", url: "/shop/category/gift-sets" },
+        { label: "MGO Graded", url: "/shop/category/mgo-graded" },
+        { label: "Value Packs", url: "/shop/category/value-packs" },
         { label: "Wholesale", url: "/wholesale" },
       ],
     },
@@ -24,7 +24,7 @@ export const mockFooterData: FooterData = {
       id: "footer-learn",
       title: "Learn",
       links: [
-        { label: "What Is UMF?", url: "/blog/what-is-umf-rating" },
+        { label: "What Is MGO?", url: "/blog/what-is-mgo-rating" },
         { label: "Origin & Traceability", url: "/our-story#origin" },
         { label: "The Harvest Process", url: "/our-story#harvest" },
         { label: "Journal", url: "/blog" },
@@ -78,10 +78,10 @@ export const mockFooterData: FooterData = {
   ],
   certifications: [
     {
-      id: "cert-umf",
-      name: "UMF Certified",
-      caption: "UMF Licensed Member #4102",
-      image: { id: "cert-umf-img", url: "/mocks/certification-umf.svg", altText: "UMF Certified" },
+      id: "cert-mgo",
+      name: "MGO Verified",
+      caption: "Independent MGO lab test, every batch",
+      image: { id: "cert-mgo-img", url: "/mocks/certification-mgo.svg", altText: "MGO Verified" },
     },
     {
       id: "cert-organic",

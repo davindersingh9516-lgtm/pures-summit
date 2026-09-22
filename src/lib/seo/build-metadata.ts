@@ -45,7 +45,12 @@ export function buildMetadata(seo: SEOData): Metadata {
   ].join(", ");
 
   return {
-    title: seo.title,
+    // `{ absolute }` opts out of the root layout's `title.template`
+    // (`%s | ${siteName}`, see src/app/layout.tsx) - Yoast (and
+    // createMockSEO) already produce a complete, final title including the
+    // site name, so applying the template on top would double it up
+    // ("Product - Pure Summit | Pure Summit").
+    title: { absolute: seo.title },
     description: seo.description,
     alternates: {
       canonical: seo.canonical,

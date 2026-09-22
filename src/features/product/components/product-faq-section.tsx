@@ -34,7 +34,7 @@ export async function ProductFAQSection() {
 
         <p className="mt-8 text-center text-sm text-(--color-foreground-muted)">
           Still have questions about this product?{" "}
-          <AppLink href="/contact" className="font-medium text-[#12291d] hover:underline">
+          <AppLink href="/contact" className="font-medium text-(--color-secondary) hover:underline">
             Contact our team →
           </AppLink>
         </p>

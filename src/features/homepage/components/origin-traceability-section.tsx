@@ -58,7 +58,7 @@ function RegionPanel({
         <p className="mt-2 text-sm leading-relaxed text-(--color-foreground-muted)">{region.description}</p>
       </div>
 
-      <dl className="grid grid-cols-2 gap-4 border-t border-(--color-border) pt-5 sm:grid-cols-4">
+      <dl className="grid grid-cols-2 gap-4 border-t border-(--color-border) pt-5 sm:grid-cols-3">
         <div>
           <dt className="text-xs text-(--color-foreground-muted) uppercase tracking-(--tracking-wide)">Harvest</dt>
           <dd className="mt-1 text-sm font-medium text-(--color-foreground)">{region.harvestWindow}</dd>
@@ -68,16 +68,12 @@ function RegionPanel({
           <dd className="mt-1 text-sm font-medium text-(--color-foreground)">{region.hiveCount}</dd>
         </div>
         <div>
-          <dt className="text-xs text-(--color-foreground-muted) uppercase tracking-(--tracking-wide)">UMF</dt>
-          <dd className="mt-1 text-sm font-medium text-(--color-foreground)">{region.umfRange}</dd>
-        </div>
-        <div>
           <dt className="text-xs text-(--color-foreground-muted) uppercase tracking-(--tracking-wide)">MGO</dt>
           <dd className="mt-1 text-sm font-medium text-(--color-foreground)">{region.mgoRange}</dd>
         </div>
       </dl>
 
-      <Button variant="link" size="sm" className="w-fit px-0 text-[#12291d] hover:opacity-80" onClick={onJumpToLookup}>
+      <Button variant="link" size="sm" className="w-fit px-0 text-(--color-secondary) hover:opacity-80" onClick={onJumpToLookup}>
         See batches from this region
         <Icon name="arrow-right" className="size-4" />
       </Button>
@@ -104,12 +100,12 @@ function RegionPanel({
                 <span
                   className={cn(
                     "size-1.5 shrink-0 rounded-(--radius-full)",
-                    active ? "bg-[#12291d]" : "bg-(--color-border-strong)",
+                    active ? "bg-(--color-secondary)" : "bg-(--color-border-strong)",
                   )}
                 />
                 {candidate.name}
               </span>
-              <span className="shrink-0 text-xs text-(--color-foreground-muted)">{candidate.umfRange}</span>
+              <span className="shrink-0 text-xs text-(--color-foreground-muted)">{candidate.mgoRange}</span>
             </button>
           );
         })}
@@ -172,7 +168,7 @@ function BatchLookup({
         <Button
           type="submit"
           disabled={status === "loading" || !query.trim()}
-          className="shrink-0 bg-[#12291d] hover:bg-[#12291d] hover:opacity-90"
+          className="shrink-0 bg-(--color-secondary) hover:bg-(--color-secondary) hover:opacity-90"
         >
           {status === "loading" ? (
             <Icon name="loader-2" className="size-4 animate-spin" />
@@ -191,13 +187,13 @@ function BatchLookup({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: duration.normal, ease: easing.editorial }}
-            className="mt-6 rounded-(--radius-lg) border border-[#12291d]/25 bg-(--color-secondary-50) p-5"
+            className="mt-6 rounded-(--radius-lg) border border-(--color-secondary)/25 bg-(--color-secondary-50) p-5"
           >
-            <div className="flex items-center gap-2 text-[#12291d]">
+            <div className="flex items-center gap-2 text-(--color-secondary)">
               <Icon name="badge-check" className="size-5" />
               <span className="text-sm font-semibold tracking-(--tracking-wide) uppercase">Verified Batch</span>
             </div>
-            <dl className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <dl className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
               <div>
                 <dt className="text-xs text-(--color-foreground-muted) uppercase tracking-(--tracking-wide)">
                   Region
@@ -209,10 +205,6 @@ function BatchLookup({
                   Harvested
                 </dt>
                 <dd className="mt-1 text-sm font-medium text-(--color-foreground)">{result.harvestDate}</dd>
-              </div>
-              <div>
-                <dt className="text-xs text-(--color-foreground-muted) uppercase tracking-(--tracking-wide)">UMF</dt>
-                <dd className="mt-1 text-sm font-medium text-(--color-foreground)">{result.umf}</dd>
               </div>
               <div>
                 <dt className="text-xs text-(--color-foreground-muted) uppercase tracking-(--tracking-wide)">MGO</dt>
@@ -293,7 +285,7 @@ export function OriginTraceabilitySection({ data }: { data: OriginTraceabilitySe
               <path
                 d={data.map.northIslandPath}
                 fill="var(--color-secondary-100)"
-                stroke="#12291d"
+                stroke="var(--color-secondary)"
                 strokeOpacity={0.45}
                 strokeWidth={1.5}
                 strokeLinejoin="round"
@@ -302,7 +294,7 @@ export function OriginTraceabilitySection({ data }: { data: OriginTraceabilitySe
               <path
                 d={data.map.southIslandPath}
                 fill="var(--color-secondary-100)"
-                stroke="#12291d"
+                stroke="var(--color-secondary)"
                 strokeOpacity={0.45}
                 strokeWidth={1.5}
                 strokeLinejoin="round"
@@ -326,12 +318,12 @@ export function OriginTraceabilitySection({ data }: { data: OriginTraceabilitySe
                     className="relative flex size-10 items-center justify-center"
                   >
                     {region.featured ? (
-                      <span className="absolute inset-0 animate-ping rounded-(--radius-full) bg-[#12291d]/35" />
+                      <span className="absolute inset-0 animate-ping rounded-(--radius-full) bg-(--color-secondary)/35" />
                     ) : null}
                     <span
                       className={cn(
-                        "relative block size-3.5 rounded-(--radius-full) border-2 border-[#12291d] transition-all duration-(--duration-fast)",
-                        isActive ? "scale-125 bg-[#12291d] ring-4 ring-[#12291d]/25" : "bg-(--color-neutral-0)",
+                        "relative block size-3.5 rounded-(--radius-full) border-2 border-(--color-secondary) transition-all duration-(--duration-fast)",
+                        isActive ? "scale-125 bg-(--color-secondary) ring-4 ring-(--color-secondary)/25" : "bg-(--color-neutral-0)",
                         !isActive && selectedId ? "opacity-60" : "opacity-100",
                       )}
                     />

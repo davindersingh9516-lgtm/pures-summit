@@ -24,7 +24,7 @@ export function CopyLinkButton({ className }: { className?: string }) {
       type="button"
       onClick={handleCopy}
       className={cn(
-        "inline-flex items-center gap-1.5 text-sm font-medium text-(--color-foreground-muted) transition-colors duration-(--duration-fast) hover:text-[#12291d]",
+        "inline-flex items-center gap-1.5 text-sm font-medium text-(--color-foreground-muted) transition-colors duration-(--duration-fast) hover:text-(--color-secondary)",
         className,
       )}
     >

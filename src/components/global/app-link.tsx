@@ -32,6 +32,16 @@ export const AppLink = React.forwardRef<HTMLAnchorElement, AppLinkProps>(
       <NextLink
         ref={ref}
         href={href}
+        // `next/link` prefetches every link the moment it scrolls into the
+        // viewport by default - on a page with dozens of product cards plus
+        // header/footer nav, that's 80-100+ simultaneous requests to the
+        // WordPress origin on first load. Locally (XAMPP, no object cache,
+        // no connection pooling) that flood was enough to make the backend
+        // intermittently stall on unrelated requests, including ones for
+        // content already visible on screen - the exact "stuck skeleton"
+        // symptom this fixes. Default off; pass `prefetch` explicitly on a
+        // specific link (e.g. a primary CTA) to opt back in.
+        prefetch={false}
         onClick={(event) => {
           if (hrefString !== pathname) startProgressBar();
           onClick?.(event);

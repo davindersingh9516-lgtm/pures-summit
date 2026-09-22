@@ -73,7 +73,7 @@ export function ContactForm() {
   if (status === "sent") {
     return (
       <div className="flex flex-col items-center justify-center gap-4 rounded-(--radius-xl) border border-(--color-border) bg-(--color-surface) py-16 text-center">
-        <span className="flex size-12 items-center justify-center rounded-(--radius-full) bg-(--color-secondary-100) text-[#12291d]">
+        <span className="flex size-12 items-center justify-center rounded-(--radius-full) bg-(--color-secondary-100) text-(--color-secondary)">
           <Icon name="badge-check" className="size-6" />
         </span>
         <div className="flex flex-col gap-2">
@@ -82,7 +82,7 @@ export function ContactForm() {
             Thanks for reaching out - a member of our team will reply within 1 business day.
           </p>
         </div>
-        <button type="button" onClick={handleReset} className="text-sm font-medium text-[#12291d] hover:underline">
+        <button type="button" onClick={handleReset} className="text-sm font-medium text-(--color-secondary) hover:underline">
           Send another message
         </button>
       </div>
@@ -152,7 +152,7 @@ export function ContactForm() {
       <Button
         type="submit"
         disabled={status === "sending"}
-        className="mt-2 h-12 w-fit bg-[#12291d] px-8 hover:bg-[#12291d] hover:opacity-90"
+        className="mt-2 h-12 w-fit bg-(--color-secondary) px-8 hover:bg-(--color-secondary) hover:opacity-90"
       >
         {status === "sending" ? (
           <>

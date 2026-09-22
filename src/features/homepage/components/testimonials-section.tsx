@@ -95,7 +95,7 @@ export async function TestimonialsSection({ data }: { data: TestimonialsSectionD
         className="pointer-events-none absolute inset-0 opacity-[0.05]"
         style={{
           backgroundImage:
-            "repeating-radial-gradient(circle at 100% 0%, transparent 0, transparent 50px, #12291d 51px, #12291d 52px)",
+            "repeating-radial-gradient(circle at 100% 0%, transparent 0, transparent 50px, var(--color-secondary) 51px, var(--color-secondary) 52px)",
         }}
       />
 

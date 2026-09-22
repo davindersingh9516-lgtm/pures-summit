@@ -1,112 +1,171 @@
 "use client";
 
-import { createContext, useContext, useMemo, type ReactNode } from "react";
-import type { Cart, CartLineItem } from "@/types";
-import { useLocalStorage } from "@/hooks/use-local-storage";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import type { Address, Cart } from "@/types";
 import { createMoney } from "@/utils/money";
 import { siteConfig } from "@/config/site.config";
 
 /**
  * CART ARCHITECTURE
  * ---------------------------------------------------------------------------
- * Client-side cart state, persisted to localStorage. This is a placeholder
- * for the real WooCommerce cart/session: once the checkout feature module
- * calls into WooGraphQL cart mutations, this context becomes a thin
- * optimistic-UI layer in front of the server cart instead of the source of
- * truth. The shape (`Cart`, `CartLineItem`) already matches that future
- * state, so the migration only touches this file, not its consumers.
+ * Thin client over the `src/app/api/cart/*` route handlers (the BFF - see
+ * src/lib/woo-session.ts), which are themselves thin callers of
+ * `src/repositories/{mock,graphql}/cart.repository.ts`. This context holds
+ * no cart math of its own anymore: every mutation round-trips to the server
+ * (WooCommerce's session cart in graphql mode) and replaces local state
+ * with whatever it returns, so displayed totals/tax/shipping are always
+ * exactly what checkout will charge.
  */
 
-function createEmptyCart(currencyCode: string): Cart {
-  const zero = createMoney(0, currencyCode);
+function emptyCart(): Cart {
+  const zero = createMoney(0, siteConfig.defaultCurrency);
   return {
-    id: "local-cart",
+    id: "",
     items: [],
     subtotal: zero,
     discountTotal: zero,
     shippingTotal: zero,
     total: zero,
-    currencyCode,
+    currencyCode: siteConfig.defaultCurrency,
     couponCodes: [],
   };
 }
 
-function recalculate(cart: Cart): Cart {
-  const subtotalAmount = cart.items.reduce((sum, item) => sum + item.lineTotal.amount, 0);
-  const subtotal = createMoney(subtotalAmount, cart.currencyCode);
-  const total = createMoney(
-    subtotalAmount - cart.discountTotal.amount + cart.shippingTotal.amount,
-    cart.currencyCode,
-  );
-  return { ...cart, subtotal, total };
+async function unwrapCart(response: Response): Promise<Cart> {
+  if (!response.ok) {
+    const body = await response.json().catch(() => ({ error: response.statusText }));
+    throw new Error(body.error ? JSON.stringify(body.error) : `Cart request failed (${response.status})`);
+  }
+  const body = (await response.json()) as { cart: Cart };
+  return body.cart;
 }
 
 interface CartContextValue {
   cart: Cart;
   itemCount: number;
   isHydrated: boolean;
-  addItem: (item: Omit<CartLineItem, "lineTotal">) => void;
-  removeItem: (itemId: string) => void;
-  updateQuantity: (itemId: string, quantity: number) => void;
-  clearCart: () => void;
+  isMutating: boolean;
+  addItem: (productId: string, quantity?: number, variantId?: string) => Promise<void>;
+  removeItem: (itemKey: string) => Promise<void>;
+  updateQuantity: (itemKey: string, quantity: number) => Promise<void>;
+  clearCart: () => Promise<void>;
+  applyCoupon: (code: string) => Promise<void>;
+  removeCoupon: (code: string) => Promise<void>;
+  updateShippingAddress: (address: Address) => Promise<void>;
+  selectShippingRate: (rateId: string) => Promise<void>;
+  refresh: () => Promise<void>;
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [cart, setCart, isHydrated] = useLocalStorage<Cart>(
-    "cart",
-    createEmptyCart(siteConfig.defaultCurrency),
-  );
+  const [cart, setCart] = useState<Cart>(emptyCart());
+  const [isHydrated, setIsHydrated] = useState(false);
+  const [isMutating, setIsMutating] = useState(false);
+  // WooCommerce's session cart is a real network round-trip (WP under local
+  // dev load can take several seconds), so the header badge would otherwise
+  // sit frozen after every click. This offsets the displayed count by any
+  // quantity change that's still in flight, then snaps back to 0 the moment
+  // the real cart state lands - a request that fails just reverts the
+  // optimistic bump since `cart.items` never changed underneath it.
+  const [optimisticDelta, setOptimisticDelta] = useState(0);
+
+  const refresh = useCallback(async () => {
+    try {
+      const response = await fetch("/api/cart");
+      setCart(await unwrapCart(response));
+    } finally {
+      setIsHydrated(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
+  const mutate = useCallback(async (request: () => Promise<Response>, delta = 0) => {
+    setIsMutating(true);
+    if (delta) setOptimisticDelta((prev) => prev + delta);
+    try {
+      const response = await request();
+      setCart(await unwrapCart(response));
+    } finally {
+      setIsMutating(false);
+      if (delta) setOptimisticDelta((prev) => prev - delta);
+    }
+  }, []);
 
   const value = useMemo<CartContextValue>(
     () => ({
       cart,
-      itemCount: cart.items.reduce((sum, item) => sum + item.quantity, 0),
+      itemCount: cart.items.reduce((sum, item) => sum + item.quantity, 0) + optimisticDelta,
       isHydrated,
-      addItem: (item) => {
-        setCart((prev) => {
-          const lineTotal = createMoney(item.unitPrice.amount * item.quantity, prev.currencyCode);
-          const existing = prev.items.find(
-            (line) => line.productId === item.productId && line.variantId === item.variantId,
-          );
-
-          const items = existing
-            ? prev.items.map((line) =>
-                line.id === existing.id
-                  ? {
-                      ...line,
-                      quantity: line.quantity + item.quantity,
-                      lineTotal: createMoney(
-                        line.unitPrice.amount * (line.quantity + item.quantity),
-                        prev.currencyCode,
-                      ),
-                    }
-                  : line,
-              )
-            : [...prev.items, { ...item, lineTotal }];
-
-          return recalculate({ ...prev, items });
-        });
-      },
-      removeItem: (itemId) => {
-        setCart((prev) => recalculate({ ...prev, items: prev.items.filter((item) => item.id !== itemId) }));
-      },
-      updateQuantity: (itemId, quantity) => {
-        setCart((prev) =>
-          recalculate({
-            ...prev,
-            items: prev.items.map((item) =>
-              item.id === itemId
-                ? { ...item, quantity, lineTotal: createMoney(item.unitPrice.amount * quantity, prev.currencyCode) }
-                : item,
-            ),
-          }),
+      isMutating,
+      addItem: (productId, quantity = 1, variantId) =>
+        mutate(
+          () =>
+            fetch("/api/cart/items", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ productId, quantity, variantId }),
+            }),
+          quantity,
+        ),
+      removeItem: (itemKey) => {
+        const existing = cart.items.find((item) => item.id === itemKey);
+        return mutate(
+          () => fetch(`/api/cart/items/${itemKey}`, { method: "DELETE" }),
+          existing ? -existing.quantity : 0,
         );
       },
-      clearCart: () => setCart(createEmptyCart(cart.currencyCode)),
+      updateQuantity: (itemKey, quantity) => {
+        const existing = cart.items.find((item) => item.id === itemKey);
+        return mutate(
+          () =>
+            fetch(`/api/cart/items/${itemKey}`, {
+              method: "PATCH",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ quantity }),
+            }),
+          existing ? quantity - existing.quantity : 0,
+        );
+      },
+      clearCart: () => mutate(() => fetch("/api/cart", { method: "DELETE" })),
+      applyCoupon: (code) =>
+        mutate(() =>
+          fetch("/api/cart/coupons", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ code }),
+          }),
+        ),
+      removeCoupon: (code) =>
+        mutate(() =>
+          fetch("/api/cart/coupons", {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ code }),
+          }),
+        ),
+      updateShippingAddress: (address) =>
+        mutate(() =>
+          fetch("/api/cart/shipping-address", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(address),
+          }),
+        ),
+      selectShippingRate: (rateId) =>
+        mutate(() =>
+          fetch("/api/cart/shipping-rate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ rateId }),
+          }),
+        ),
+      refresh,
     }),
-    [cart, isHydrated, setCart],
+    [cart, isHydrated, isMutating, optimisticDelta, mutate, refresh],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

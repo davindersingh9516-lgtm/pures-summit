@@ -31,7 +31,7 @@ export async function TrustIconsSection({ data: _data }: { data: TrustIconsSecti
                   <span
                     className={cn(
                       "flex size-14 items-center justify-center rounded-(--radius-full)",
-                      index === 0 ? "bg-[#12291d]" : "bg-(--color-accent)",
+                      index === 0 ? "bg-(--color-secondary)" : "bg-(--color-accent)",
                     )}
                   >
                     <Icon

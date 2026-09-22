@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import type { ComparisonTableSectionData } from "@/types";
 
 /**
- * Feature-comparison matrix (e.g. UMF vs. MGO grades side-by-side). Purely
+ * Feature-comparison matrix (e.g. MGO grade bands side-by-side). Purely
  * presentational - every cell comes straight from `data.rows`/`data.columns`,
  * aligned by index. A `highlight` column gets the classic "recommended
  * plan" treatment: a raised card, accent border, and a pill above its

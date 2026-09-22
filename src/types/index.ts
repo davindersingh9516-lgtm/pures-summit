@@ -8,6 +8,7 @@ export * from "./product.types";
 export * from "./blog.types";
 export * from "./review.types";
 export * from "./cart.types";
+export * from "./checkout.types";
 export * from "./header.types";
 export * from "./announcement.types";
 export * from "./search.types";

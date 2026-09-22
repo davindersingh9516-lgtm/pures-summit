@@ -17,8 +17,8 @@ export const mockNavigationData: NavigationData = {
         url: "/shop",
         children: [
           { id: "nav-shop-raw", label: "Raw Manuka Honey", url: "/shop/category/raw-manuka-honey" },
-          { id: "nav-shop-umf", label: "UMF Graded", url: "/shop/category/umf-graded" },
-          { id: "nav-shop-gifts", label: "Gift Sets", url: "/shop/category/gift-sets" },
+          { id: "nav-shop-mgo", label: "MGO Graded", url: "/shop/category/mgo-graded" },
+          { id: "nav-shop-packs", label: "Value Packs", url: "/shop/category/value-packs" },
         ],
       },
       { id: "nav-our-story", label: "Our Story", url: "/our-story" },
